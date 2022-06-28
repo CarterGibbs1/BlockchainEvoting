@@ -1,0 +1,7 @@
+sudo docker-compose down
+sudo docker-compose up
+
+sudo docker exec -it sawtooth-shell-default bash
+
+npm run dev
+npm run start
