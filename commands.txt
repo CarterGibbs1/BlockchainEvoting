@@ -5,3 +5,5 @@ sudo docker exec -it sawtooth-shell-default bash
 
 npm run dev
 npm run start
+
+--url http://rest-api:8008
