@@ -21,12 +21,28 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 public class BallotHandler implements TransactionHandler {
+
+    private final Logger logger = Logger.getLogger(BallotHandler.class.getName());
+    private String ballotNameSpace;
+
+    /**
+     * default constructor
+     */
+    public BallotHandler() {
+        try {
+            this.ballotNameSpace = Utils.hash512(this.transactionFamilyName().getBytes("UTF-8")).substring(0, 6);
+          } catch (UnsupportedEncodingException usee) {
+            usee.printStackTrace();
+            this.ballotNameSpace = "";
+          }
+    }
+
     /**
      * Returns the transaction family's name.
      * @return the transaction family's name
      */
     public String transactionFamilyName() {
-        return null;
+        return "ballot";
     }
 
     /**
@@ -34,7 +50,7 @@ public class BallotHandler implements TransactionHandler {
      * @return the transaction family's version
      */
     public String getVersion() {
-        return null;
+        return "1.0";
 
     }
 
@@ -43,7 +59,9 @@ public class BallotHandler implements TransactionHandler {
      * @return the namespaces for this transaction handler
      */
     public Collection<String> getNameSpaces() {
-        return null;
+        ArrayList<String> namespaces = new ArrayList<>();
+        namespaces.add(this.ballotNameSpace);
+        return namespaces;
 
     }
 
@@ -57,4 +75,16 @@ public class BallotHandler implements TransactionHandler {
     public void apply(TpProcessRequest transactionRequest, Context state) throws InvalidTransactionException, InternalError {
 
     }
+
+    class TransactionData {
+        final String gameName;
+        final String action;
+        final String space;
+    
+        TransactionData(String gameName, String action, String space) {
+          this.gameName = gameName;
+          this.action = action;
+          this.space = space;
+        }
+      }
 }
