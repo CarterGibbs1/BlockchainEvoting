@@ -1,6 +1,4 @@
-package sawtooth.examples.xo;
-
-import sawtooth.examples.xo.XoHandler;
+import sawtooth.BallotHandler;
 import sawtooth.sdk.processor.TransactionProcessor;
 
 public class BallotTransactionProcessor {
