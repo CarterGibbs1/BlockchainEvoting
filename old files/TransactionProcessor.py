@@ -1,7 +1,9 @@
 import sys
-sys.path.append('./sawtooth/sawtooth_sdk/processor/')
-import TransactionProcessor
-sys.path.append('./sawtooth/sawtooth_ballot/processor/')
+
+from sawtooth.sawtooth_ballot.processor.handler import BallotTransactionHandler
+sys.path.append('sawtooth/sawtooth_sdk/processor/')
+from core import TransactionProcessor
+sys.path.append('sawtooth/sawtooth_ballot/processor/')
 from handler import BallotTransactionHandler
 
 def main():
@@ -14,3 +16,6 @@ def main():
     processor.add_handler(handler)
 
     processor.start()
+
+if __name__ == "__main__":
+    main()

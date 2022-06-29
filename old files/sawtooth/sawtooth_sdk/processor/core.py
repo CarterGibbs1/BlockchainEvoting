@@ -17,12 +17,13 @@ from concurrent.futures import CancelledError
 import concurrent.futures
 import itertools
 import logging
+import sys
 
 from enum import Enum
-
-from sawtooth_sdk.messaging.exceptions import ValidatorConnectionError
-from sawtooth_sdk.messaging.exceptions import ValidatorVersionError
-from sawtooth_sdk.messaging.future import FutureTimeoutError
+sys.path.append('sawtooth/sawtooth_sdk/messaging/')
+from exceptions import ValidatorConnectionError
+from exceptions import ValidatorVersionError
+from future import FutureTimeoutError
 from sawtooth_sdk.messaging.stream import RECONNECT_EVENT
 from sawtooth_sdk.messaging.stream import Stream
 
