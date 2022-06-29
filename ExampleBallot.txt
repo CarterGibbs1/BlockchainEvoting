@@ -1,0 +1,3 @@
+ballot create [name]
+ballot vote [name] [candidate]
+ballot spoil [name]

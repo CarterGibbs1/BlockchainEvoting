@@ -1,8 +1,10 @@
 import hashlib
 import string
-from sawtooth_sdk.protobuf.transaction_pb2 import TransactionHeader
+from sawtooth.examples.xo_python.sawtooth_xo.processor.handler import _display
+from sawtooth.sawtooth_sdk.processor.handler import TransactionHandler
 from sawtooth.sawtooth_sdk.processor.exceptions import InternalError, InvalidTransaction
 
+BALLOT_NAMESPACE = hashlib.sha512('ballot'.encode("utf-8")).hexdigest()[0:6]
 
 class BallotTransactionHandler(TransactionHandler):
     def __init__(self, namespace_prefix):
@@ -24,19 +26,38 @@ class BallotTransactionHandler(TransactionHandler):
         header = transaction.header
         signer = header.signer_public_key 
 
-        Ballot_payload = BallotPayload.from_bytes(transaction.payload)
+        ballot_payload = BallotPayload.from_bytes(transaction.payload)
 
-        xo_state = BallotState(context)
+        ballot_state = BallotState(context)
 
-        if BallotPayload.action == 'create':
-            return
-        elif BallotPayload.action == 'vote':
-            return
-        elif BallotPayload.action == 'spoil':
-            return
+        ## Create a ballot
+        if ballot_payload.action == 'create':
+            if ballot_state.get_ballot(ballot_payload.name) is not None:
+                raise InvalidTransaction('Invalid action: Ballot already exists: {}'.format(ballot_payload.name))
+            ballot = Ballot(name=ballot_payload.name,candidate = "",state="Not Voted")
+            ballot_state.set_ballot(ballot_payload.name, ballot)
+            _display("Voter {} created a ballot.".format(signer[:6]))
+
+        elif ballot_payload.action == 'vote':
+            if ballot_state.get_ballot(ballot_payload.name) is None:
+                raise InvalidTransaction('Invalid action: Ballot does not exist: {}'.format(ballot_payload.name))
+            ballot_state.get_ballot(ballot_payload.name).set_candidate(ballot_payload.candidate)
+
+        elif ballot_payload.action == 'spoil':
+            ballot = ballot_state.get_ballot(ballot_payload.name)
+            if ballot is None:
+                raise InvalidTransaction('Invalid action: Ballot does not exist')
+            ballot_state.delete_ballot(ballot_payload.name)
+            if ballot_state.get_ballot(ballot_payload.name) is not None:
+                raise InvalidTransaction('Invalid action: Ballot already exists: {}'.format(ballot_payload.name))
+            ballot = Ballot(name=ballot_payload.name,candidate = "",state="Not Voted")
+            ballot_state.set_ballot(ballot_payload.name, ballot)
+            _display("Voter {} created a ballot.".format(signer[:6]))
+            if ballot_state.get_ballot(ballot_payload.name) is None:
+                raise InvalidTransaction('Invalid action: Ballot does not exist: {}'.format(ballot_payload.name))
+            ballot_state.get_ballot(ballot_payload.name).set_candidate(ballot_payload.candidate)
         else:
-            raise InvalidTransaction('Unhandled action: {}'.format(
-                BallotPayload.action))
+            raise InvalidTransaction('Unhandled action: {}'.format(ballot_payload.action))
 
 ## Class to encode the ballot
 class BallotPayload:
@@ -80,7 +101,7 @@ class BallotPayload:
         return self._action
 
     @property
-    def space(self):
+    def candidate(self):
         return self._candidate
 
 ## Holds the ballot
@@ -89,6 +110,9 @@ class Ballot:
         self.name = name
         self.candidate = candidate
         self.state = state
+    
+    def set_candidate(self, candidate):
+        self.candidate = candidate
 
 ## Defines the state of the ballot
 class BallotState:
@@ -105,7 +129,7 @@ class BallotState:
         self._context = context
         self._address_cache = {}
 
-    def delete_game(self, ballot_name):
+    def delete_ballot(self, ballot_name):
         """Delete the Ballot named ballot_name from state. May be used for spoiling
         Args:
             ballot_name (str): The name.
@@ -121,7 +145,7 @@ class BallotState:
         else:
             self._delete_ballot(ballot_name)
 
-    def set_game(self, ballot_name, ballot):
+    def set_ballot(self, ballot_name, ballot):
         """Store the ballot in the validator state.
         Args:
             ballot_name (str): The name.
@@ -143,13 +167,12 @@ class BallotState:
         """
 
         return self._load_ballots(ballot_name=ballot_name).get(ballot_name)
-    
-    @staticmethod
-    def _make_ballot_address(ballot_name):
+
+    def make_ballot_address(ballot_name):
         return BALLOT_NAMESPACE + hashlib.sha512(ballot_name.encode('utf-8')).hexdigest()[:64]
 
     def _store_ballot(self, ballot_name, ballots):
-        address = _make_ballot_address(ballot_name)
+        address = self.make_ballot_address(ballot_name)
 
         state_data = self._serialize(ballots)
 
@@ -159,8 +182,8 @@ class BallotState:
             {address: state_data},
             timeout=self.TIMEOUT)
 
-    def _delete_game(self, ballot_name):
-        address = _make_ballot_address(ballot_name)
+    def _delete_ballot(self, ballot_name):
+        address = self.make_ballot_address(ballot_name)
 
         self._context.delete_state(
             [address],
@@ -169,7 +192,7 @@ class BallotState:
         self._address_cache[address] = None
 
     def _load_ballots(self, ballot_name):
-        address = _make_ballot_address(ballot_name)
+        address = self.make_ballot_address(ballot_name)
 
         if address in self._address_cache:
             if self._address_cache[address]:
