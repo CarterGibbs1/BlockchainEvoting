@@ -186,7 +186,7 @@ public class BasicElectionHandler implements TransactionHandler {
 		} else {
 			try {
 				String electionCsv = getElectionCsv(stateEntry, name);
-				ArrayList<String> electionList = new ArrayList<>(Arrays.asList(gameCsv.split(",")));
+				ArrayList<String> electionList = new ArrayList<>(Arrays.asList(electionCsv.split(",")));
 				while (electionList.size() < 3) {
 					electionList.add("");
 				}
