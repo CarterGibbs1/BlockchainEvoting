@@ -173,16 +173,38 @@ services:
 # -------------=== shell ===-------------
 
   shell:
-    image: hyperledger/sawtooth-shell:chime
-    container_name: sawtooth-shell-default
+    build:
+      context: .
+      dockerfile: docker/sawtooth-shell
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+    image: sawtooth-shell-local:latest
     volumes:
+      - ./:/project/sawtooth-core
       - pbft-shared:/pbft-shared
+    container_name: sawtooth-shell-default
     command: |
       bash -c "
-        sawtooth keygen
+        sawtooth keygen &&
         tail -f /dev/null
       "
     stop_signal: SIGKILL
+
+
+
+#  shell:
+#    image: hyperledger/sawtooth-shell:chime
+#    container_name: sawtooth-shell-default
+#    volumes:
+#      - pbft-shared:/pbft-shared
+#    command: |
+#      bash -c "
+#        sawtooth keygen
+#        tail -f /dev/null
+#      "
+#    stop_signal: SIGKILL
 
 # -------------=== validators ===-------------
 
@@ -414,41 +436,98 @@ services:
 # -------------=== xo tps ===-------------
 
   xo-tp-0:
-    image: hyperledger/sawtooth-xo-tp-python:chime
-    container_name: sawtooth-xo-tp-python-default-0
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      context: .
+      dockerfile: ./examples/election_basic/Dockerfile
+    image: sawtooth-xo-tp-java-local:latest
+    depends_on: 
+      - "validator-0"
+    volumes:
+      - .:/project/sawtooth-sdk-java
+    container_name: sawtooth-xo-tp-java-default-0
     expose:
       - 4004
-    command: xo-tp-python -vv -C tcp://validator-0:4004
+    command: election-tp-java tcp://validator-0:4004
     stop_signal: SIGKILL
 
   xo-tp-1:
-    image: hyperledger/sawtooth-xo-tp-python:chime
-    container_name: sawtooth-xo-tp-python-default-1
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      context: .
+      dockerfile: ./examples/election_basic/Dockerfile
+    image: sawtooth-xo-tp-java-local:latest
+    depends_on: 
+      - "validator-1"
+    volumes:
+      - .:/project/sawtooth-sdk-java
+    container_name: sawtooth-xo-tp-java-default-1
     expose:
       - 4004
-    command: xo-tp-python -vv -C tcp://validator-1:4004
+    command: election-tp-java tcp://validator-1:4004
     stop_signal: SIGKILL
 
   xo-tp-2:
-    image: hyperledger/sawtooth-xo-tp-python:chime
-    container_name: sawtooth-xo-tp-python-default-2
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      context: .
+      dockerfile: ./examples/election_basic/Dockerfile
+    depends_on: 
+      - "validator-2"
+    image: sawtooth-xo-tp-java-local:latest
+    volumes:
+      - .:/project/sawtooth-sdk-java
+    container_name: sawtooth-xo-tp-java-default-2
     expose:
       - 4004
-    command: xo-tp-python -vv -C tcp://validator-2:4004
+    command: election-tp-java tcp://validator-2:4004
     stop_signal: SIGKILL
 
   xo-tp-3:
-    image: hyperledger/sawtooth-xo-tp-python:chime
-    container_name: sawtooth-xo-tp-python-default-3
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      context: .
+      dockerfile: ./examples/election_basic/Dockerfile
+    
+    depends_on: 
+      - "validator-3"
+    image: sawtooth-xo-tp-java-local:latest
+    volumes:
+      - .:/project/sawtooth-sdk-java
+    container_name: sawtooth-xo-tp-java-default-3
     expose:
       - 4004
-    command: xo-tp-python -vv -C tcp://validator-3:4004
+    command: election-tp-java tcp://validator-3:4004 #; sleep 100000
     stop_signal: SIGKILL
 
   xo-tp-4:
-    image: hyperledger/sawtooth-xo-tp-python:chime
-    container_name: sawtooth-xo-tp-python-default-4
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      context: .
+      dockerfile: ./examples/election_basic/Dockerfile
+    depends_on: 
+      - "validator-4"
+    image: sawtooth-xo-tp-java-local:latest
+    volumes:
+      - .:/project/sawtooth-sdk-java
+    container_name: sawtooth-xo-tp-java-default-4
     expose:
       - 4004
-    command: xo-tp-python -vv -C tcp://validator-4:4004
+    command: election-tp-java tcp://validator-4:4004
     stop_signal: SIGKILL
+ 

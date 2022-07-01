@@ -17,4 +17,4 @@
 
 top_dir=$(cd $(dirname $(dirname $0)) && pwd)
 cd $top_dir/examples/xo_java
-java -cp ./target/xo_java-1.0-SNAPSHOT.jar sawtooth.examples.xo.XoTransactionProcessor $*
+java -cp ./target/ballot_java-1.0-SNAPSHOT.jar sawtooth.examples.xo.XoTransactionProcessor $*
