@@ -19,7 +19,7 @@ public class ElgamalCipherText implements CipherText {
     @Represented(restorer = "G")
     private GroupElement c1;
     /**
-     * c2 := h^r *m
+     * c2 := g^m * h^r
      */
     @Represented(restorer = "G")
     private GroupElement c2;
@@ -38,13 +38,18 @@ public class ElgamalCipherText implements CipherText {
      * Creates a ciphertext object.
      *
      * @param c1 c1 := g^r
-     * @param c2 c2 := h^r *m
+     * @param c2 c2 := g^m * h^r
      */
     public ElgamalCipherText(GroupElement c1, GroupElement c2) {
         this.c1 = c1;
         this.c2 = c2;
     }
 
+    public ElgamalCipherText applyAddition(ElgamalCipherText toAdd) {
+        GroupElement newc1 = this.c1.op(toAdd.c1);
+        GroupElement newc2 = this.c2.op(toAdd.c2);
+        return new ElgamalCipherText(newc1, newc2);
+    }
     @Override
     public Representation getRepresentation() {
         return ReprUtil.serialize(this);

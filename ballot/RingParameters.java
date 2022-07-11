@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public class RingParameters {
 
-    private static BigInteger message;
+    private static ElgamalCipherText message;
     private static ArrayList<ElgamalPublicKey> publicKeys;
     private static BigInteger v; // solution of ring equation
     private static ArrayList<BigInteger> x;
     private static Zn.ZnElement random_seed;
 
-    public RingParameters(BigInteger message, ArrayList<ElgamalPublicKey> pk, BigInteger v, ArrayList<BigInteger> x, Zn.ZnElement random) {
+    public RingParameters(ElgamalCipherText message, ArrayList<ElgamalPublicKey> pk, BigInteger v, ArrayList<BigInteger> x, Zn.ZnElement random) {
         this.message = message;
         this.publicKeys = pk;
         this.v = v;
@@ -27,7 +27,7 @@ public class RingParameters {
             y.add(Ring.trapdoor(encrypted_message, random_seed));
         }
 
-        var a = Ring.solveRingEquation(y, message, random_seed.asInteger());
+        var a = Ring.solveRingEquation(y, Ring.sha1(message.toString()), random_seed.asInteger());
         return a.equals(v);
     }
 
@@ -45,7 +45,7 @@ public class RingParameters {
         return s.toString();
     }
 
-    public BigInteger getMessage() {
+    public ElgamalCipherText getMessage() {
         return message;
     }
 

@@ -12,7 +12,9 @@ import org.cryptimeleon.math.structures.rings.zn.HashIntoZn;
 import org.cryptimeleon.math.structures.rings.zn.Zn;
 import org.cryptimeleon.math.structures.rings.zn.Zn.ZnElement;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -39,6 +41,7 @@ import java.util.Objects;
 public class ElgamalEncryption implements AsymmetricEncryptionScheme {
 
     @Represented
+    static
     Group groupG;
 
     public ElgamalEncryption(Group groupG) {
@@ -116,7 +119,7 @@ public class ElgamalEncryption implements AsymmetricEncryptionScheme {
         ZnElement a = ((ElgamalPrivateKey) privateKey).getA();
         GroupElement u = cpCipherText.getC1().pow(a);
         GroupElement m = u.inv().op(cpCipherText.getC2());
-        return new GroupElementPlainText(m.compute());
+        return new ElgamalPlainText(m.compute());
     }
 
     /**
@@ -150,21 +153,58 @@ public class ElgamalEncryption implements AsymmetricEncryptionScheme {
         return publicKey.getG().pow(message).op(publicKey.getH().pow(random)).equals(C);
     }
 
-    public ElgamalCipherText encryptText(String s, ElgamalPublicKey publicKey) {
+    public ElgamalCipherText encryptText(String text, ElgamalPublicKey publicKey) {
         var zn = groupG.getZn();
-        var m = new HashIntoZn(zn).hash(s);
+        var m = new HashIntoZn(zn).hash(text);
 
         Zn zn_random = new Zn(groupG.size());
         ZnElement random = zn_random.getUniformlyRandomElement();
         GroupElement g = publicKey.getG();
+        g.precomputePow();
         GroupElement h = publicKey.getH();
+        h.precomputePow();
 
         //c1 = g^r
         GroupElement c1 = g.pow(random);
 
-        //c2 = h^r * plaintext
-        GroupElement c2 = h.pow(random).op(m);
+        //c2 := g^m * h^r
+        GroupElement c2 = g.pow(m).op(h.pow(random));
         return new ElgamalCipherText(c1, c2);
+    }
+
+    public GroupElement commit(Zn.ZnElement encrypted_message, ElgamalPublicKey publicKey,Zn.ZnElement r) {
+        //var r = scheme.getGroup().getZn().getUniformlyRandomElement();
+        var C = (publicKey.getG().pow(encrypted_message).op(publicKey.getH().pow(r)));
+        C.computeSync();
+        return C;
+    }
+
+    public ElgamalCipherText encryptText(ZnElement m, ElgamalPublicKey publicKey) {
+        Zn zn_random = new Zn(groupG.size());
+        ZnElement random = zn_random.getUniformlyRandomElement();
+        GroupElement g = publicKey.getG();
+        g.precomputePow();
+        GroupElement h = publicKey.getH();
+        h.precomputePow();
+
+        //c1 = g^r
+        GroupElement c1 = g.pow(random);
+
+
+        //c2 := g^m * h^r
+        //GroupElement c2 = g.pow(m).op(h.pow(random));
+        //GroupElement c2 = h.pow(random).op();
+        //return new ElgamalCipherText(c1, c2);
+        return null;
+    }
+
+    public BigInteger decryptText(ElgamalCipherText cipherText, ElgamalPrivateKey privateKey) {
+        ZnElement a = privateKey.getA();
+        GroupElement u = cipherText.getC1().pow(a); // h^r
+        GroupElement gm = u.inv().op(cipherText.getC2());
+        BigInteger bigInt_gm = new BigInteger(gm.getUniqueByteRepresentation());
+        BigInteger m = BigInteger.valueOf((long) (Math.log(bigInt_gm.longValue()) / Math.log(new BigInteger(privateKey.getG().getUniqueByteRepresentation()).longValue())));
+        return m;
     }
 
     @Override
@@ -203,5 +243,32 @@ public class ElgamalEncryption implements AsymmetricEncryptionScheme {
     @Override
     public int hashCode() {
         return groupG != null ? groupG.hashCode() : 0;
+    }
+
+    /**
+     * Applies the logarithm operator to a value, assuming that the value is a member of the group. This is done by exhaustive search.
+     * @param value The value that is a member of the group.
+     * @return The power which the generator is raised to, to get the value provided.
+     */
+    public static long discreteLogarithm(BigInteger value, BigInteger r)
+    {
+        boolean logFound = false;
+        long power = 0;
+        BigInteger current = BigInteger.valueOf(1);
+        while(!logFound)
+        {
+            if(current.equals(value)) {
+                logFound = true;
+            } else {
+                power++;
+                current = multiplyMod(current, r);
+            }
+        }
+        return power;
+    }
+
+    private static BigInteger multiplyMod(BigInteger value, BigInteger r)
+    {
+        return value.multiply(new BigInteger(groupG.getGenerator().getUniqueByteRepresentation())).mod(r);
     }
 }

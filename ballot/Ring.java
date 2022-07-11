@@ -47,7 +47,8 @@ public class Ring {
             copyX.add(new Random().nextInt(copyX.size() + 1), x.get(i));
         }
          */
-        return new RingParameters(hashed_message, copyOfPubKeys, ys, copyX, r);
+        var encrypted = scheme.encryptText(s, (ElgamalPublicKey) keyPair.getPk());
+        return new RingParameters(encrypted, copyOfPubKeys, ys, copyX, r);
     }
 
     // Helper methods
