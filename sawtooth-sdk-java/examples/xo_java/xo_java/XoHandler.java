@@ -1,4 +1,4 @@
-/* Copyright 2017 Intel Corporation
+package xo_java.xo_java;/* Copyright 2017 Intel Corporation
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
@@ -11,12 +11,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 ------------------------------------------------------------------------------*/
-package examples.xo_java;
 
-import com.google.common.*;
-import com.google.protobuf.*;
-import examples.Ring.src.main.Paillier.PaillierCipherText;
-import examples.Ring.src.main.Paillier.PaillierPublicKey;
+import com.google.protobuf.ByteString;
 import org.apache.commons.lang3.StringUtils;
 import sawtooth.sdk.processor.Context;
 import sawtooth.sdk.processor.TransactionHandler;
@@ -25,6 +21,8 @@ import sawtooth.sdk.processor.exceptions.InternalError;
 import sawtooth.sdk.processor.exceptions.InvalidTransactionException;
 import sawtooth.sdk.protobuf.TpProcessRequest;
 import sawtooth.sdk.protobuf.TransactionHeader;
+import xo_java.Paillier.PaillierCipherText;
+import xo_java.Paillier.PaillierPublicKey;
 
 import java.io.*;
 import java.util.*;
