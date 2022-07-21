@@ -442,7 +442,7 @@ services:
         - https_proxy
         - no_proxy
       context: .
-      dockerfile: ./examples/election_basic/Dockerfile
+      dockerfile: ./examples/xo_java/Dockerfile
     image: sawtooth-xo-tp-java-local:latest
     depends_on: 
       - "validator-0"
@@ -451,7 +451,7 @@ services:
     container_name: sawtooth-xo-tp-java-default-0
     expose:
       - 4004
-    command: election-tp-java tcp://validator-0:4004
+    command: xo-tp-java tcp://validator-0:4004
     stop_signal: SIGKILL
 
   xo-tp-1:
@@ -461,7 +461,7 @@ services:
         - https_proxy
         - no_proxy
       context: .
-      dockerfile: ./examples/election_basic/Dockerfile
+      dockerfile: ./examples/xo_java/Dockerfile
     image: sawtooth-xo-tp-java-local:latest
     depends_on: 
       - "validator-1"
@@ -470,7 +470,7 @@ services:
     container_name: sawtooth-xo-tp-java-default-1
     expose:
       - 4004
-    command: election-tp-java tcp://validator-1:4004
+    command: xo-tp-java tcp://validator-1:4004
     stop_signal: SIGKILL
 
   xo-tp-2:
@@ -480,7 +480,7 @@ services:
         - https_proxy
         - no_proxy
       context: .
-      dockerfile: ./examples/election_basic/Dockerfile
+      dockerfile: ./examples/xo_java/Dockerfile
     depends_on: 
       - "validator-2"
     image: sawtooth-xo-tp-java-local:latest
@@ -489,7 +489,7 @@ services:
     container_name: sawtooth-xo-tp-java-default-2
     expose:
       - 4004
-    command: election-tp-java tcp://validator-2:4004
+    command: xo-tp-java tcp://validator-2:4004
     stop_signal: SIGKILL
 
   xo-tp-3:
@@ -499,7 +499,7 @@ services:
         - https_proxy
         - no_proxy
       context: .
-      dockerfile: ./examples/election_basic/Dockerfile
+      dockerfile: ./examples/xo_java/Dockerfile
     
     depends_on: 
       - "validator-3"
@@ -509,7 +509,7 @@ services:
     container_name: sawtooth-xo-tp-java-default-3
     expose:
       - 4004
-    command: election-tp-java tcp://validator-3:4004 #; sleep 100000
+    command: xo-tp-java tcp://validator-3:4004 #; sleep 100000
     stop_signal: SIGKILL
 
   xo-tp-4:
@@ -519,7 +519,7 @@ services:
         - https_proxy
         - no_proxy
       context: .
-      dockerfile: ./examples/election_basic/Dockerfile
+      dockerfile: ./examples/xo_java/Dockerfile
     depends_on: 
       - "validator-4"
     image: sawtooth-xo-tp-java-local:latest
@@ -528,6 +528,6 @@ services:
     container_name: sawtooth-xo-tp-java-default-4
     expose:
       - 4004
-    command: election-tp-java tcp://validator-4:4004
+    command: xo-tp-java tcp://validator-4:4004
     stop_signal: SIGKILL
  

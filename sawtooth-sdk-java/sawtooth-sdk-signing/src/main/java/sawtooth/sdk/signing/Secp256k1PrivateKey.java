@@ -14,8 +14,6 @@
 
 package sawtooth.sdk.signing;
 
-
-import com.google.common.io.BaseEncoding;
 import org.bitcoinj.core.Utils;
 
 /**
