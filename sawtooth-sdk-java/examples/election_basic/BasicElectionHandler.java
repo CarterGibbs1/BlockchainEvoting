@@ -12,16 +12,9 @@
  limitations under the License.
 ------------------------------------------------------------------------------*/
 
-package sawtooth.examples.election_basic;
-
-
+package election_basic;
 import com.google.protobuf.ByteString;
-import com.google.protobuf.InvalidProtocolBufferException;
-
-import blah.*;
-
 import org.apache.commons.lang3.StringUtils;
-
 import sawtooth.sdk.processor.Context;
 import sawtooth.sdk.processor.TransactionHandler;
 import sawtooth.sdk.processor.Utils;
@@ -29,39 +22,29 @@ import sawtooth.sdk.processor.exceptions.InternalError;
 import sawtooth.sdk.processor.exceptions.InvalidTransactionException;
 import sawtooth.sdk.protobuf.TpProcessRequest;
 import sawtooth.sdk.protobuf.TransactionHeader;
+import xo_java.Paillier.PaillierCipherText;
+import xo_java.Paillier.PaillierPublicKey;
+import xo_java.XoHandler;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class BasicElectionHandler implements TransactionHandler {
 
-	private final Logger logger = Logger.getLogger(BasicElectionHandler.class.getName());
-	private String electionNameSpace;
+	private final Logger logger = Logger.getLogger(XoHandler.class.getName());
+	private String xoNameSpace;
 
 	/**
 	 * constructor.
 	 */
 	public BasicElectionHandler() {
 		try {
-			this.electionNameSpace = Utils.hash512(
+			this.xoNameSpace = Utils.hash512(
 					this.transactionFamilyName().getBytes("UTF-8")).substring(0, 6);
 		} catch (UnsupportedEncodingException usee) {
 			usee.printStackTrace();
-			this.electionNameSpace = "";
+			this.xoNameSpace = "";
 		}
 	}
 
@@ -78,64 +61,62 @@ public class BasicElectionHandler implements TransactionHandler {
 	@Override
 	public Collection<String> getNameSpaces() {
 		ArrayList<String> namespaces = new ArrayList<>();
-		namespaces.add(this.electionNameSpace);
+		namespaces.add(this.xoNameSpace);
 		return namespaces;
 	}
 
 	class TransactionData {
+		final String electionName;
 		final String action;
-		final String name;
-		final String ciphersOrKey;
+		final String ballotOrKey;
 
-		TransactionData(String action, String name, String pub_key_or_ciphers) {
+		TransactionData(String gameName, String action, String ballotOrKey) {
+			this.electionName = gameName;
 			this.action = action;
-			this.name = name;
-			this.ciphersOrKey = pub_key_or_ciphers;
+			this.ballotOrKey = ballotOrKey;
 		}
 	}
 
 	class ElectionData {
 		final String electionName;
 		final String cipher;
-		final String electionPub;
+		final String pubKey;
 
-		ElectionData(String electionName, String electionPub, String cipher) {
+		ElectionData(String electionName, String cipher, String pubKey) {
 			this.electionName = electionName;
-			this.electionPub = electionPub;
 			this.cipher = cipher;
-			
-//			System.out.println(electionPub);
-//			System.out.println(cipher);
+			this.pubKey = pubKey;
 		}
 	}
 
 	@Override
-	public void apply(TpProcessRequest transactionRequest, Context context) throws InvalidTransactionException, InternalError { 
-		
+	public void apply(TpProcessRequest transactionRequest, Context context)
+			throws InvalidTransactionException, InternalError {
+
 		TransactionData transactionData = getUnpackedTransaction(transactionRequest);
 
 		// The transaction signer is the voter or the election creator (person)
 		String person;
 		TransactionHeader header = transactionRequest.getHeader();
 		person = header.getSignerPublicKey();
-		AdditiveCiphertext[] ciphers = null;
+		PaillierCipherText[] ciphers = null;
 
 		if (transactionData.action.equals("vote")) {
 			try {
-				byte[] rawCipher = Base64.getDecoder().decode(transactionData.ciphersOrKey);
+				byte[] rawCipher = Base64.getDecoder().decode(transactionData.ballotOrKey);
 				ByteArrayInputStream bis = new ByteArrayInputStream(rawCipher);
 				ObjectInput in = new ObjectInputStream(bis);
-				ciphers = (AdditiveCiphertext[]) in.readObject();
+				ciphers = (PaillierCipherText[]) in.readObject();
 				in.close();
 			} catch (NumberFormatException | IOException | ClassNotFoundException e) {
 				e.printStackTrace();
 				throw new InvalidTransactionException("Ballot array is invalid. 4");
 			}
 		}
-		if (transactionData.name.equals("")) {
+		if (transactionData.electionName.equals("")) {
 			throw new InvalidTransactionException("Election name is required");
 		}
-		if (transactionData.name.contains("|")) {
+		if (transactionData.electionName.contains("|")) {
 			throw new InvalidTransactionException("Election name cannot contain '|'");
 		}
 		if (transactionData.action.equals("")) {
@@ -146,22 +127,20 @@ public class BasicElectionHandler implements TransactionHandler {
 					String.format("Invalid action: %s", transactionData.action));
 		}
 
-		String address = makeAddress(transactionData.name);
+		String address = makeElectionAddress(transactionData.electionName);
 		// context.get() returns a list.
 		// If no data has been stored yet at the given address, it will be empty.
-		String stateEntry = context.getState(
-				Collections.singletonList(address)
-				).get(address).toStringUtf8();
-		ElectionData stateData = getStateData(stateEntry, transactionData.name);
+		String stateEntry = context.getState(Collections.singletonList(address)).get(address).toStringUtf8();
+		ElectionData stateData = getStateData(stateEntry, transactionData.electionName);
 
 		ElectionData updatedElectionData = runElection(transactionData, stateData, person);
 //		System.out.printf("In updatedElectionData:\n\n%s\n%s\n%s\n\n",updatedElectionData.electionName,updatedElectionData.,updatedElectionData.get(2));
-		
+
 		storeElectionData(address, updatedElectionData, stateEntry, context);
 	}
 
 	/**
-	 * Helper function to retrieve election electionName, action, and pub_key from transaction request.
+	 * Helper function to retrieve game gameName, action, and space from transaction request.
 	 */
 	private TransactionData getUnpackedTransaction(TpProcessRequest transactionRequest)
 			throws InvalidTransactionException {
@@ -173,27 +152,26 @@ public class BasicElectionHandler implements TransactionHandler {
 		while (payloadList.size() < 3) {
 			payloadList.add("");
 		}
-		return new TransactionData(payloadList.get(1), payloadList.get(0), payloadList.get(2).replaceAll("\\R", ""));
+		return new TransactionData(payloadList.get(0), payloadList.get(1), payloadList.get(2));
 	}
 
 	/**
-	 * Helper function to retrieve the electionData from state store.
+	 * Helper function to retrieve the board, state, playerOne, and playerTwo from state store.
 	 */
-	private ElectionData getStateData(String stateEntry, String name)
+	private ElectionData getStateData(String stateEntry, String gameName)
 			throws InternalError, InvalidTransactionException {
 		if (stateEntry.length() == 0) {
 			return new ElectionData("", "", "");
 		} else {
 			try {
-				String electionCsv = getElectionCsv(stateEntry, name);
+				String electionCsv = getGameCsv(stateEntry, gameName);
 				ArrayList<String> electionList = new ArrayList<>(Arrays.asList(electionCsv.split(",")));
 				while (electionList.size() < 3) {
 					electionList.add("");
 				}
-//				System.out.printf("In getStateData:\n\n%s\n%s\n%s\n\n",electionList.get(0),electionList.get(1),electionList.get(2));
 				return new ElectionData(electionList.get(0), electionList.get(1), electionList.get(2));
 			} catch (Error e) {
-				throw new InternalError("Failed to deserialize election data");
+				throw new InternalError("Failed to deserialize game data");
 			}
 		}
 	}
@@ -201,23 +179,23 @@ public class BasicElectionHandler implements TransactionHandler {
 	/**
 	 * Helper function to generate game address.
 	 */
-	private String makeAddress(String name) throws InternalError {
+	private String makeElectionAddress(String gameName) throws InternalError {
 		try {
-			String hashedName = Utils.hash512(name.getBytes("UTF-8"));
-			return electionNameSpace + hashedName.substring(0, 64);
+			String hashedName = Utils.hash512(gameName.getBytes("UTF-8"));
+			return xoNameSpace + hashedName.substring(0, 64);
 		} catch (UnsupportedEncodingException e) {
 			throw new InternalError("Internal Error: " + e.toString());
 		}
 	}
 
 	/**
-	 * Helper function to retrieve the correct election info from the list of game data CSV.
+	 * Helper function to retrieve the correct game info from the list of game data CSV.
 	 */
-	private String getElectionCsv(String stateEntry, String electionName) {
-		ArrayList<String> electionCsvList = new ArrayList<>(Arrays.asList(stateEntry.split("\\|")));
-		for (String electionCsv : electionCsvList) {
-			if (electionCsv.regionMatches(0, electionName, 0, electionName.length())) {
-				return electionCsv;
+	private String getGameCsv(String stateEntry, String gameName) {
+		ArrayList<String> gameCsvList = new ArrayList<>(Arrays.asList(stateEntry.split("\\|")));
+		for (String gameCsv : gameCsvList) {
+			if (gameCsv.regionMatches(0, gameName, 0, gameName.length())) {
+				return gameCsv;
 			}
 		}
 		return "";
@@ -225,18 +203,17 @@ public class BasicElectionHandler implements TransactionHandler {
 
 	/** Helper function to store state data. */
 	private void storeElectionData(
-			String address, ElectionData electionData, String stateEntry, Context context)
-					throws InternalError, InvalidTransactionException {
-		String electionDataCsv = String.format("%s,%s,%s",
-				electionData.electionName, electionData.electionPub, electionData.cipher);
+			String address, ElectionData gameData, String stateEntry, Context context)
+			throws InternalError, InvalidTransactionException {
+		String gameDataCsv = String.format("%s,%s,%s", gameData.electionName, gameData.cipher, gameData.pubKey);
 		if (stateEntry.length() == 0) {
-			stateEntry = electionDataCsv;
+			stateEntry = gameDataCsv;
 		} else {
 			ArrayList<String> dataList = new ArrayList<>(Arrays.asList(stateEntry.split("\\|")));
 			for (int i = 0; i <= dataList.size(); i++) {
 				if (i == dataList.size()
-						|| dataList.get(i).regionMatches(0, electionData.electionName, 0, electionData.electionName.length())) {
-					dataList.set(i, electionDataCsv);
+						|| dataList.get(i).regionMatches(0, gameData.electionName, 0, gameData.electionName.length())) {
+					dataList.set(i, gameDataCsv);
 					break;
 				}
 			}
@@ -255,50 +232,49 @@ public class BasicElectionHandler implements TransactionHandler {
 	/**
 	 * Function that handles game logic.
 	 */
-	private ElectionData runElection(TransactionData transactionData, ElectionData electionData, String person)
+	private ElectionData runElection(TransactionData transactionData, ElectionData gameData, String player)
 			throws InvalidTransactionException, InternalError {
 		switch (transactionData.action) {
-		case "create":
-			return applyCreate(transactionData, electionData, person);
-		case "vote":
-			return applyVote(transactionData, electionData, person);
-		default:
-			throw new InvalidTransactionException(String.format(
-					"Invalid action: %s gadhgfkdajhgjk", transactionData.action));
+			case "create":
+				return applyCreate(transactionData, gameData, player);
+			case "vote":
+				return applyVote(transactionData, gameData, player);
+			default:
+				throw new InvalidTransactionException(String.format("Invalid action: %s", transactionData.action));
 		}
 	}
 
 	/**
-	 * Function that handles creating an election transaction.
+	 * Function that handles game logic for 'create' action.
+	 * @return
 	 */
-	private ElectionData applyCreate(TransactionData transactionData, ElectionData electionData, String person)
-			throws InvalidTransactionException {
+	private ElectionData applyCreate(TransactionData transactionData, ElectionData electionData, String player) throws InvalidTransactionException {
 		if (!electionData.cipher.equals("")) {
 			throw new InvalidTransactionException("Invalid Action: Election already exists");
 		}
-		
-		Additive_Pub_Key pub_key = null;
+
+		PaillierPublicKey pub_key;
 
 		try {
-			byte[] rawCipher = Base64.getDecoder().decode(transactionData.ciphersOrKey);
+			byte[] rawCipher = Base64.getDecoder().decode(transactionData.ballotOrKey);
 			ByteArrayInputStream bis = new ByteArrayInputStream(rawCipher);
 			ObjectInput in = new ObjectInputStream(bis);
-			pub_key = (PaillierPubKey) in.readObject();
+			pub_key = (PaillierPublicKey) in.readObject();
 			in.close();
 		} catch (NumberFormatException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 			throw new InvalidTransactionException("PubKey is invalid");
 		}
-		AdditiveCiphertext[] ciphers = new AdditiveCiphertext[5];
-		
-		AdditiveCiphertext empty = pub_key.getEmptyCiphertext();
+		PaillierCipherText[] ciphers = new PaillierCipherText[5];
+
+		PaillierCipherText empty = pub_key.getEmptyCipherText();
 		for(int i = 0; i < ciphers.length; i++) {
 			ciphers[i] = empty;
 		}
-		
-		display(String.format("%s created an election", abbreviate(person)));
-		
-		byte[] rawByteArray = null;
+
+		display(String.format("%s created an election", abbreviate(player)));
+
+		byte[] rawByteArray;
 		try {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			ObjectOutput out = new ObjectOutputStream(bos);
@@ -309,33 +285,33 @@ public class BasicElectionHandler implements TransactionHandler {
 		} catch (IOException e) {
 			throw new InvalidTransactionException("Internal error: ballot array is invalid.");
 		}
-		return new ElectionData(transactionData.name, transactionData.ciphersOrKey, Base64.getEncoder().encodeToString(rawByteArray));
+		return new ElectionData(transactionData.electionName, transactionData.ballotOrKey, Base64.getEncoder().encodeToString(rawByteArray));
 	}
 
 	/**
-	 * Function that handles vote transactions.
+	 * Function that handles game logic for 'take' action.
+	 * @return
 	 */
-	private ElectionData applyVote(TransactionData transactionData, ElectionData electionData, String person) throws InvalidTransactionException, InternalError {
-
-		AdditiveCiphertext[] ciphers = null;
+	private ElectionData applyVote(TransactionData transactionData, ElectionData electionData, String player) throws InvalidTransactionException, InternalError {
+		PaillierCipherText[] ciphers = null;
 
 		try {
-			byte[] rawCipher = Base64.getDecoder().decode(transactionData.ciphersOrKey);
+			byte[] rawCipher = Base64.getDecoder().decode(transactionData.ballotOrKey);
 			ByteArrayInputStream bis = new ByteArrayInputStream(rawCipher);
 			ObjectInput in = new ObjectInputStream(bis);
-			ciphers = (AdditiveCiphertext[]) in.readObject();
+			ciphers = (PaillierCipherText[]) in.readObject();
 			in.close();
 		} catch (NumberFormatException | IOException | ClassNotFoundException e) {
 			throw new InvalidTransactionException("Ballot array is invalid. 1");
 		}
 
-		AdditiveCiphertext[] stateCiphers = null;
+		PaillierCipherText[] stateCiphers = null;
 
 		try {
 			byte[] rawCipher = Base64.getDecoder().decode(electionData.cipher);
 			ByteArrayInputStream bis = new ByteArrayInputStream(rawCipher);
 			ObjectInput in = new ObjectInputStream(bis);
-			stateCiphers = (AdditiveCiphertext[]) in.readObject();
+			stateCiphers = (PaillierCipherText[]) in.readObject();
 			in.close();
 		} catch (NumberFormatException | IOException | ClassNotFoundException e) {
 			throw new InvalidTransactionException("Ballot array is invalid. 2");
@@ -344,7 +320,7 @@ public class BasicElectionHandler implements TransactionHandler {
 			throw new InvalidTransactionException("Ballot array is invalid, Incorrect number of votes.");
 		}
 		for(int i = 0; i < stateCiphers.length; i++) {
-			stateCiphers[i] = stateCiphers[i].homomorphicAdd(ciphers[i]);
+			stateCiphers[i] = stateCiphers[i].hAdd(ciphers[i]);
 		}
 		byte updatedCipherRaw[] = null;
 		try {
@@ -358,27 +334,24 @@ public class BasicElectionHandler implements TransactionHandler {
 			throw new InvalidTransactionException("Ballot array is invalid. 3");
 		}
 		String updatedCipher = Base64.getEncoder().encodeToString(updatedCipherRaw);
-		
-		ElectionData updatedElectionData = new ElectionData(electionData.electionName, electionData.electionPub, updatedCipher);
+
+		ElectionData updatedElectionData = new ElectionData(electionData.electionName, electionData.pubKey, updatedCipher);
 
 		display(electionDataToString(updatedElectionData));
 		return updatedElectionData;
 	}
 
-	/**
-	 * Helper function to create an ASCII representation of the election.
-	 */
 	private String electionDataToString(ElectionData electionData) {
 		String out = "";
 
 		out += String.format("Election: %s\n", electionData.electionName);
 		out += "\n";
-		AdditiveCiphertext[] ciphers = null;
+		PaillierCipherText[] ciphers = null;
 		try {
 			byte[] rawCipher = Base64.getDecoder().decode(electionData.cipher);
 			ByteArrayInputStream bis = new ByteArrayInputStream(rawCipher);
 			ObjectInput in = new ObjectInputStream(bis);
-			ciphers = (AdditiveCiphertext[]) in.readObject();
+			ciphers = (PaillierCipherText[]) in.readObject();
 			in.close();
 			for(int i = 0; i < ciphers.length; i++) {
 				out += (ciphers[i].toString() + "\n");
@@ -388,9 +361,6 @@ public class BasicElectionHandler implements TransactionHandler {
 		return out;
 	}
 
-	/**
-	 * Helper function to print election data to the logger.
-	 */
 	private void display(String msg) {
 		String displayMsg = "";
 		int length = 0;
@@ -427,7 +397,7 @@ public class BasicElectionHandler implements TransactionHandler {
 	/**
 	 * Helper function to shorten a string to a max of 6 characters for logging purposes.
 	 */
-	private Object abbreviate(String person) {
-		return person.substring(0, Math.min(person.length(), 6));
+	private Object abbreviate(String player) {
+		return player.substring(0, Math.min(player.length(), 6));
 	}
 }

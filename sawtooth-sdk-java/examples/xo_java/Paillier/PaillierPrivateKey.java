@@ -5,7 +5,7 @@ import java.math.BigInteger;
 /**
  * A class that represents the private part of the examples.xo_java.Paillier key pair.
  */
-class PaillierPrivateKey {
+public class PaillierPrivateKey {
 
     private final BigInteger lambda;
     private final BigInteger preCalculatedDenominator;
@@ -22,5 +22,10 @@ class PaillierPrivateKey {
 
     public BigInteger getPreCalculatedDenominator() {
         return preCalculatedDenominator;
+    }
+
+    public BigInteger sign(String m) {
+        BigInteger s = PaillierRing.sha1(m);
+        return s.modPow(s, lambda);
     }
 }

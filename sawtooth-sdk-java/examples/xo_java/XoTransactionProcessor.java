@@ -12,10 +12,10 @@
  limitations under the License.
 ------------------------------------------------------------------------------*/
 
-package xo_java.xo_java;
+package xo_java;
 
 import sawtooth.sdk.processor.TransactionProcessor;
-import xo_java.xo_java.XoHandler;
+import xo_java.XoHandler;
 
 public class XoTransactionProcessor {
   /**

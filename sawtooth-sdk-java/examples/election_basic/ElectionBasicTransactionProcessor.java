@@ -12,9 +12,7 @@
  limitations under the License.
 ------------------------------------------------------------------------------*/
 
-package sawtooth.examples.election_basic;
-
-import sawtooth.examples.election_basic.BasicElectionHandler;
+package election_basic;
 import sawtooth.sdk.processor.TransactionProcessor;
 
 public class ElectionBasicTransactionProcessor {
