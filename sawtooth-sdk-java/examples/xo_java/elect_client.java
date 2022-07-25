@@ -1,20 +1,17 @@
 package xo_java;
 
 import com.google.protobuf.ByteString;
-import xo_java.Paillier.PaillierPrivateKey;
-import xo_java.Paillier.PaillierPublicKey;
+import election_basic.Paillier.PaillierPrivateKey;
+import election_basic.Paillier.PaillierPublicKey;
 
 import java.io.*;
 import java.math.BigInteger;
-import java.net.HttpURLConnection;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
-import java.util.concurrent.Flow;
 
 public class elect_client {
 
@@ -58,24 +55,7 @@ public class elect_client {
         elect_batch_list batch_list = _create_batch_list(List.of(transaction));
         String batch_id = batch_list.batches.get(0).headerSignature;
 
-        return _send_request("batches", batch_list.serializeToString(), "application/octet-stream");
-    }
-
-    private String _send_request(String suffix, String data, String content) {
-        url = "http://{}/{}".format(url, suffix);
-        HttpRequest.Builder result = HttpRequest.newBuilder();
-        try {
-            if (data != null) {
-                result = result.POST(url, headers = headers, data = data);
-            } else {
-                result = requests.get(url, headers = headers);
-            }
-            if result.status_code == 404:
-            raise XoException ("No such game: {}".format(name));
-
-            if not result.ok:
-            throw new Exception("Error {}: {}".format(result.status_code, result.reason));
-        }
+        return null;
     }
 
     /**

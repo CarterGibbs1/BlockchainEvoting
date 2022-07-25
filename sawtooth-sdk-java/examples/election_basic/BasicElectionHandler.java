@@ -13,7 +13,10 @@
 ------------------------------------------------------------------------------*/
 
 package election_basic;
+
 import com.google.protobuf.ByteString;
+import election_basic.Paillier.PaillierCipherText;
+import election_basic.Paillier.PaillierPublicKey;
 import org.apache.commons.lang3.StringUtils;
 import sawtooth.sdk.processor.Context;
 import sawtooth.sdk.processor.TransactionHandler;
@@ -22,9 +25,6 @@ import sawtooth.sdk.processor.exceptions.InternalError;
 import sawtooth.sdk.processor.exceptions.InvalidTransactionException;
 import sawtooth.sdk.protobuf.TpProcessRequest;
 import sawtooth.sdk.protobuf.TransactionHeader;
-import xo_java.Paillier.PaillierCipherText;
-import xo_java.Paillier.PaillierPublicKey;
-import xo_java.XoHandler;
 
 import java.io.*;
 import java.util.*;
@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 
 public class BasicElectionHandler implements TransactionHandler {
 
-	private final Logger logger = Logger.getLogger(XoHandler.class.getName());
+	private final Logger logger = Logger.getLogger(BasicElectionHandler.class.getName());
 	private String xoNameSpace;
 
 	/**
