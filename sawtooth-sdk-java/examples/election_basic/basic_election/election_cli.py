@@ -343,7 +343,7 @@ def do_create(args):
     keyfile = _get_keyfile(args)
     auth_user, auth_password = _get_auth_info(args)
     f = open(pubKeyFile,'r')
-    key = f.readline();
+    key = f.readline()
     client = ElectionClient(base_url=url, keyfile=keyfile)
 
 
@@ -365,7 +365,7 @@ def do_take(args):
     voteFile = args.voteFile
 
     f = open(voteFile,'r')
-    vote = f.readline();
+    vote = f.readline()
     
     url = _get_url(args)
     keyfile = _get_keyfile(args)

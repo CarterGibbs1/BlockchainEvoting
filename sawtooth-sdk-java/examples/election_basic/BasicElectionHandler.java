@@ -90,8 +90,7 @@ public class BasicElectionHandler implements TransactionHandler {
 	}
 
 	@Override
-	public void apply(TpProcessRequest transactionRequest, Context context)
-			throws InvalidTransactionException, InternalError {
+	public void apply(TpProcessRequest transactionRequest, Context context) throws InvalidTransactionException, InternalError {
 
 		TransactionData transactionData = getUnpackedTransaction(transactionRequest);
 
