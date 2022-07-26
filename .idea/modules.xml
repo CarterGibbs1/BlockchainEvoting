@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/BlockchainEvoting.iml" filepath="$PROJECT_DIR$/.idea/BlockchainEvoting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sawtooth-sdk-java/sawtooth-sdk-java.iml" filepath="$PROJECT_DIR$/sawtooth-sdk-java/sawtooth-sdk-java.iml" />
     </modules>
   </component>
 </project>

@@ -1,6 +1,9 @@
 package election_basic.Paillier;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.Scanner;
 
@@ -11,7 +14,7 @@ public class Election {
     private static KeyPair keyPair;
 
     public Election() {
-        KeyPairBuilder keygen = new KeyPairBuilder();
+        election_basic.Paillier.KeyPairBuilder keygen = new election_basic.Paillier.KeyPairBuilder();
         keyPair = keygen.generateKeyPair();
         createDatabaseFile();
     }
@@ -34,7 +37,7 @@ public class Election {
             File f = new File(FILE_DIR);
             if (!f.exists() || !f.isFile()) throw new IllegalArgumentException("File does not exist. No votes to add");
             Scanner s = new Scanner(f);
-            s.useDelimiter(PaillierRingParameters.DELIMITER);
+            s.useDelimiter(election_basic.Paillier.PaillierRingParameters.DELIMITER);
             total = new BigInteger(s.next());
             s.nextLine();
             while (s.hasNextLine()) {
@@ -48,7 +51,7 @@ public class Election {
         }
         return null;
     }
-    public boolean addVoteToDatabase(PaillierRingParameters vote) {
+    public boolean addVoteToDatabase(election_basic.Paillier.PaillierRingParameters vote) {
         if (!vote.verifyRingSignature()) {
             return false;
         }
@@ -72,11 +75,15 @@ public class Election {
         return first.multiply(second).mod(keyPair.getPublicKey().getnSquared());
     }
 
-    public PaillierPublicKey getPk() {
+    public election_basic.Paillier.PaillierPublicKey getPk() {
         return keyPair.getPublicKey();
     }
 
-    public BigInteger revealResult(PaillierCipherText encrypted) {
+    public election_basic.Paillier.PaillierPrivateKey getSk() {
+        return keyPair.getPrivateKey();
+    }
+
+    public BigInteger revealResult(election_basic.Paillier.PaillierCipherText encrypted) {
         return keyPair.decrypt(encrypted);
     }
 

@@ -13,6 +13,7 @@
 ------------------------------------------------------------------------------*/
 
 package election_basic;
+
 import sawtooth.sdk.processor.TransactionProcessor;
 
 public class ElectionBasicTransactionProcessor {
