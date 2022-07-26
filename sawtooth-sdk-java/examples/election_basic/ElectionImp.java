@@ -91,10 +91,14 @@ public class ElectionImp {
         String address = encoder.getBlockchainAddressFromKey("election", args[1]);
 
         logger.info("Sending address as - " + address);
-        TransactionHeader txnHeader = TransactionHeader.newBuilder().clearBatcherPublicKey()
+        TransactionHeader.Builder txnHeaderb = TransactionHeader.newBuilder().clearBatcherPublicKey()
                 .setBatcherPublicKey(publicKeyHex).setFamilyName("election")
                 .setFamilyVersion("1.0").addInputs(address).setNonce(String.valueOf(new Random().nextInt())).addOutputs(address)
-                .setPayloadSha512(payloadBytes).setSignerPublicKey(publicKeyHex).build();
+                .setPayloadSha512(payloadBytes).setSignerPublicKey(publicKeyHex);
+
+        logger.info("before building");
+
+        TransactionHeader txnHeader = txnHeaderb.build();
 
         logger.info("Created transaction header - " + txnHeader);
         ByteString txnHeaderBytes = txnHeader.toByteString();
