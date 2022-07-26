@@ -72,9 +72,9 @@ public class ElectionImp {
         BatchList batchList = BatchList.newBuilder().addBatches(batch).build();
         ByteString batchBytes = batchList.toByteString();
 
-	logger.info("Posting to \"tcp://validator:4004\"");
+	logger.info("Posting to \"http://validator:4004\"");
 
-        String serverResponse = Unirest.post("tcp://validator:4004")
+        String serverResponse = Unirest.post("http://validator:4004")
                 .header("Content-Type", "application/octet-stream").body(batchBytes.toByteArray()).asString()
                 .getBody();
 
@@ -130,8 +130,8 @@ public class ElectionImp {
         BatchList batchList = BatchList.newBuilder().addBatches(batch).build();
         ByteString batchBytes = batchList.toByteString();
 
-        logger.info("Posting to \"tcp://validator:4004\"");
-        String serverResponse = Unirest.post("tcp://validator:4004")
+        logger.info("Posting to \"http://validator:4004\"");
+        String serverResponse = Unirest.post("http://validator:4004")
                 .header("Content-Type", "application/octet-stream").body(batchBytes.toByteArray()).asString()
                 .getBody();
 
