@@ -6,7 +6,7 @@ import java.math.BigInteger;
 /**
  * A class that represents the private part of the examples.xo_java.Paillier key pair.
  */
-public class PaillierPrivateKey {
+public class PaillierPrivateKey implements Serializable {
 
     private final BigInteger lambda;
     private final BigInteger preCalculatedDenominator;

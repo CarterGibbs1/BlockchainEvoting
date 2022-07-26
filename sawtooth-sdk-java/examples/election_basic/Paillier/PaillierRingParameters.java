@@ -5,7 +5,7 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
-public class PaillierRingParameters {
+public class PaillierRingParameters implements Serializable {
 
     private static BigInteger message;
     private static ArrayList<PaillierPublicKey> publicKeys;

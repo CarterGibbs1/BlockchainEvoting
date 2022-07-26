@@ -17,7 +17,7 @@ import java.util.Random;
  *
  * @see KeyPair
  */
-public class PaillierPublicKey {
+public class PaillierPublicKey implements Serializable {
     private final int bits;
     private final BigInteger n;
     private final BigInteger nSquared;
