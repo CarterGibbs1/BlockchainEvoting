@@ -1,6 +1,11 @@
 package election_basic.Paillier;
+
+import org.apache.commons.codec.binary.Hex;
+
+import java.io.*;
 import java.math.BigInteger;
 import java.util.Random;
+
 
 /**
  * A class that represents the public part of the examples.xo_java.Paillier key pair.
@@ -63,6 +68,13 @@ public class PaillierPublicKey {
         return new PaillierCipherText(result, this);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(bits + ";" + n + ";" + nSquared + ";" + g);
+        return sb.toString();
+    }
+
     /**
      * Encrypts the given plaintext.
      *
@@ -83,6 +95,42 @@ public class PaillierPublicKey {
         result = result.mod(pk.getnSquared());
 
         return result;
+    }
+
+    public static void toFile(PaillierPublicKey publicKey, String name) throws IOException {
+        File f = new File(name);
+        if (f.exists() || f.isFile()) {
+            f.delete();
+        }
+        f.createNewFile();
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(publicKey);
+        FileOutputStream fos = new FileOutputStream(f);
+        PrintWriter pw = new PrintWriter(fos);
+        pw.print(bos.toByteArray());
+        oos.close();
+        bos.close();
+        pw.close();
+        fos.close();
+    }
+
+    public static PaillierPublicKey fromFile(String name) throws IOException, ClassNotFoundException {
+        File f = new File(name);
+        if (f.exists() || f.isFile()) {
+            throw new FileNotFoundException("File does not exist");
+        }
+        FileInputStream fis = new FileInputStream(f);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        PaillierPublicKey pk = (PaillierPublicKey) ois.readObject();
+        ois.close();
+        fis.close();
+        return pk;
+    }
+
+    public String toHex() {
+        String s = this.toString();
+        return Hex.encodeHexString(s.getBytes());
     }
 
     // Helper for Handler

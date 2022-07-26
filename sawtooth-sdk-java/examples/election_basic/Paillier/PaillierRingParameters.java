@@ -1,5 +1,6 @@
 package election_basic.Paillier;
 
+import java.io.*;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -69,5 +70,36 @@ public class PaillierRingParameters {
         sb.append(getX() + DELIMITER);
         sb.append(getRandom_seed());
         return sb.toString();
+    }
+
+    public static void toFile(PaillierRingParameters ringParameters, String name) throws IOException {
+        File f = new File(name);
+        if (f.exists() || f.isFile()) {
+            f.delete();
+        }
+        f.createNewFile();
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(ringParameters);
+        FileOutputStream fos = new FileOutputStream(f);
+        PrintWriter pw = new PrintWriter(fos);
+        pw.print(bos.toByteArray());
+        oos.close();
+        bos.close();
+        pw.close();
+        fos.close();
+    }
+
+    public static PaillierRingParameters fromFile(String name) throws IOException, ClassNotFoundException {
+        File f = new File(name);
+        if (f.exists() || f.isFile()) {
+            throw new FileNotFoundException("File does not exist");
+        }
+        FileInputStream fis = new FileInputStream(f);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        PaillierRingParameters rp = (PaillierRingParameters) ois.readObject();
+        ois.close();
+        fis.close();
+        return rp;
     }
 }
