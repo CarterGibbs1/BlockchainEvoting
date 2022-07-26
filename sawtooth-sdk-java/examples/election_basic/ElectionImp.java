@@ -17,9 +17,6 @@ public class ElectionImp {
 
     private static final Logger logger = Logger.getLogger(ElectionImp.class.getName());
 
-    private static final String pubKeyFile = "./project/sawtooth-sdk-java/electionPubKey.txt";
-    private static final String privKeyFile = "./project/sawtooth-sdk-java/electionPrivKey.txt";
-
     private BlockchainEncoder encoder = new BlockchainEncoder();
 
     /**
@@ -32,9 +29,10 @@ public class ElectionImp {
 
     }
 */
+// (action) (name) (pubKey) (privKey)
     public void create(String[] args) throws UnirestException, IOException, ClassNotFoundException {
-        PaillierPrivateKey privateKey = PaillierPrivateKey.fromFile(privKeyFile);
-        String publicKeyHex = PaillierPublicKey.fromFile(pubKeyFile).toHex();
+        PaillierPrivateKey privateKey = PaillierPrivateKey.fromFile(args[3]);
+        String publicKeyHex = PaillierPublicKey.fromFile(args[2]).toHex();
 
         // Parameters in sequence : action, name
         String payload = args[0] + "," + args[1];
@@ -78,8 +76,8 @@ public class ElectionImp {
     }
 
     public void vote(String[] args) throws IOException, ClassNotFoundException, UnirestException {
-        String publicKeyHex = PaillierPublicKey.fromFile(pubKeyFile).toHex();
-        PaillierPrivateKey privateKey = PaillierPrivateKey.fromFile(privKeyFile);
+        String publicKeyHex = PaillierPublicKey.fromFile(args[2]).toHex();
+        PaillierPrivateKey privateKey = PaillierPrivateKey.fromFile(args[3]);
 
 
         // Parameters in sequence : action, name, ringFile
