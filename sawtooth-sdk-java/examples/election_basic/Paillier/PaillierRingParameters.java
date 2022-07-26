@@ -92,7 +92,7 @@ public class PaillierRingParameters {
 
     public static PaillierRingParameters fromFile(String name) throws IOException, ClassNotFoundException {
         File f = new File(name);
-        if (f.exists() || f.isFile()) {
+        if (!f.exists() || !f.isFile()) {
             throw new FileNotFoundException("File does not exist");
         }
         FileInputStream fis = new FileInputStream(f);
