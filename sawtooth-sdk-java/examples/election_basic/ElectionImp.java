@@ -35,7 +35,7 @@ public class ElectionImp {
         String publicKeyHex = PaillierPublicKey.fromFile(args[2]).toHex();
 
         // Parameters in sequence : action, name
-        String payload = args[0] + "," + args[1];
+        String payload = args[0] + "," + args[1] + "," + PaillierPublicKey.fromFile(args[2]).toString();
         logger.info("Sending payload as - " + payload);
         String payloadBytes = Utils.hash512(payload.getBytes());
         ByteString payloadByteString = ByteString.copyFrom(payload.getBytes());
@@ -49,24 +49,30 @@ public class ElectionImp {
                 .setFamilyVersion("1.0").addInputs(address).setNonce(String.valueOf(new Random().nextInt())).addOutputs(address)
                 .setPayloadSha512(payloadBytes).setSignerPublicKey(publicKeyHex).build();
 
+        logger.info("Created transaction header - " + txnHeader);
         ByteString txnHeaderBytes = txnHeader.toByteString();
 
         String value = privateKey.sign(txnHeader.toString()).toString();
         Transaction txn = Transaction.newBuilder().setHeader(txnHeaderBytes).setPayload(payloadByteString)
                 .setHeaderSignature(value).build();
+        logger.info("Created transaction - " + txn);
 
         //TpProcessRequest tp = TpProcessRequest.newBuilder().setHeader(txnHeader).setPayload(payloadByteString).setSignature(value).build();
 
         BatchHeader batchHeader = BatchHeader.newBuilder().clearSignerPublicKey().setSignerPublicKey(publicKeyHex)
                 .addTransactionIds(txn.getHeaderSignature()).build();
+        logger.info("Created batch header - " + batchHeader);
 
         ByteString batchHeaderBytes = batchHeader.toByteString();
 
         String valueBatch = privateKey.sign(batchHeaderBytes.toString()).toString();
         Batch batch = Batch.newBuilder().setHeader(batchHeaderBytes).setHeaderSignature(valueBatch).setTrace(true)
                 .addTransactions(txn).build();
+        logger.info("Created batch - " + batch);
         BatchList batchList = BatchList.newBuilder().addBatches(batch).build();
         ByteString batchBytes = batchList.toByteString();
+
+	logger.info("Posting to \"http://validator:4004\"");
 
         String serverResponse = Unirest.post("http://validator:4004")
                 .header("Content-Type", "application/octet-stream").body(batchBytes.toByteArray()).asString()
