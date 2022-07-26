@@ -20,37 +20,11 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=_b('\n\025sawtooth.sdk.protobufP\001Z\rprocessor_pb2'),
-  serialized_pb=_b('\n%sawtooth_sdk/protobuf/processor.proto\x1a\'sawtooth_sdk/protobuf/transaction.proto\"\x95\x02\n\x11TpRegisterRequest\x12\x0e\n\x06\x66\x61mily\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\x12\x12\n\nnamespaces\x18\x04 \x03(\t\x12\x15\n\rmax_occupancy\x18\x05 \x01(\r\x12\x18\n\x10protocol_version\x18\x06 \x01(\r\x12L\n\x14request_header_style\x18\x07 \x01(\x0e\x32..TpRegisterRequest.TpProcessRequestHeaderStyle\"L\n\x1bTpProcessRequestHeaderStyle\x12\x16\n\x12HEADER_STYLE_UNSET\x10\x00\x12\x0c\n\x08\x45XPANDED\x10\x01\x12\x07\n\x03RAW\x10\x02\"\x89\x01\n\x12TpRegisterResponse\x12*\n\x06status\x18\x01 \x01(\x0e\x32\x1a.TpRegisterResponse.Status\x12\x18\n\x10protocol_version\x18\x02 \x01(\r\"-\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\t\n\x05\x45RROR\x10\x02\"\x15\n\x13TpUnregisterRequest\"s\n\x14TpUnregisterResponse\x12,\n\x06status\x18\x01 \x01(\x0e\x32\x1c.TpUnregisterResponse.Status\"-\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\t\n\x05\x45RROR\x10\x02\"\x84\x01\n\x10TpProcessRequest\x12\"\n\x06header\x18\x01 \x01(\x0b\x32\x12.TransactionHeader\x12\x0f\n\x07payload\x18\x02 \x01(\x0c\x12\x11\n\tsignature\x18\x03 \x01(\t\x12\x12\n\ncontext_id\x18\x04 \x01(\t\x12\x14\n\x0cheader_bytes\x18\x05 \x01(\x0c\"\xb7\x01\n\x11TpProcessResponse\x12)\n\x06status\x18\x01 \x01(\x0e\x32\x19.TpProcessResponse.Status\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x15\n\rextended_data\x18\x03 \x01(\x0c\"O\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x17\n\x13INVALID_TRANSACTION\x10\x02\x12\x12\n\x0eINTERNAL_ERROR\x10\x03\x42(\n\x15sawtooth.sdk.protobufP\x01Z\rprocessor_pb2b\x06proto3')
+  serialized_pb=_b('\n%sawtooth_sdk/protobuf/processor.proto\x1a\'sawtooth_sdk/protobuf/transaction.proto\"_\n\x11TpRegisterRequest\x12\x0e\n\x06\x66\x61mily\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\x12\x12\n\nnamespaces\x18\x04 \x03(\t\x12\x15\n\rmax_occupancy\x18\x05 \x01(\r\"o\n\x12TpRegisterResponse\x12*\n\x06status\x18\x01 \x01(\x0e\x32\x1a.TpRegisterResponse.Status\"-\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\t\n\x05\x45RROR\x10\x02\"\x15\n\x13TpUnregisterRequest\"s\n\x14TpUnregisterResponse\x12,\n\x06status\x18\x01 \x01(\x0e\x32\x1c.TpUnregisterResponse.Status\"-\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\t\n\x05\x45RROR\x10\x02\"n\n\x10TpProcessRequest\x12\"\n\x06header\x18\x01 \x01(\x0b\x32\x12.TransactionHeader\x12\x0f\n\x07payload\x18\x02 \x01(\x0c\x12\x11\n\tsignature\x18\x03 \x01(\t\x12\x12\n\ncontext_id\x18\x04 \x01(\t\"\xb7\x01\n\x11TpProcessResponse\x12)\n\x06status\x18\x01 \x01(\x0e\x32\x19.TpProcessResponse.Status\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x15\n\rextended_data\x18\x03 \x01(\x0c\"O\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x17\n\x13INVALID_TRANSACTION\x10\x02\x12\x12\n\x0eINTERNAL_ERROR\x10\x03\x42(\n\x15sawtooth.sdk.protobufP\x01Z\rprocessor_pb2b\x06proto3')
   ,
   dependencies=[sawtooth__sdk_dot_protobuf_dot_transaction__pb2.DESCRIPTOR,])
 
 
-
-_TPREGISTERREQUEST_TPPROCESSREQUESTHEADERSTYLE = _descriptor.EnumDescriptor(
-  name='TpProcessRequestHeaderStyle',
-  full_name='TpRegisterRequest.TpProcessRequestHeaderStyle',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='HEADER_STYLE_UNSET', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='EXPANDED', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='RAW', index=2, number=2,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=284,
-  serialized_end=360,
-)
-_sym_db.RegisterEnumDescriptor(_TPREGISTERREQUEST_TPPROCESSREQUESTHEADERSTYLE)
 
 _TPREGISTERRESPONSE_STATUS = _descriptor.EnumDescriptor(
   name='Status',
@@ -73,8 +47,8 @@ _TPREGISTERRESPONSE_STATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=455,
-  serialized_end=500,
+  serialized_start=245,
+  serialized_end=290,
 )
 _sym_db.RegisterEnumDescriptor(_TPREGISTERRESPONSE_STATUS)
 
@@ -99,8 +73,8 @@ _TPUNREGISTERRESPONSE_STATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=455,
-  serialized_end=500,
+  serialized_start=245,
+  serialized_end=290,
 )
 _sym_db.RegisterEnumDescriptor(_TPUNREGISTERRESPONSE_STATUS)
 
@@ -129,8 +103,8 @@ _TPPROCESSRESPONSE_STATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=882,
-  serialized_end=961,
+  serialized_start=649,
+  serialized_end=728,
 )
 _sym_db.RegisterEnumDescriptor(_TPPROCESSRESPONSE_STATUS)
 
@@ -170,26 +144,11 @@ _TPREGISTERREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='protocol_version', full_name='TpRegisterRequest.protocol_version', index=4,
-      number=6, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='request_header_style', full_name='TpRegisterRequest.request_header_style', index=5,
-      number=7, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
-    _TPREGISTERREQUEST_TPPROCESSREQUESTHEADERSTYLE,
   ],
   serialized_options=None,
   is_extendable=False,
@@ -197,8 +156,8 @@ _TPREGISTERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=83,
-  serialized_end=360,
+  serialized_start=82,
+  serialized_end=177,
 )
 
 
@@ -216,13 +175,6 @@ _TPREGISTERRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='protocol_version', full_name='TpRegisterResponse.protocol_version', index=1,
-      number=2, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -236,8 +188,8 @@ _TPREGISTERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=363,
-  serialized_end=500,
+  serialized_start=179,
+  serialized_end=290,
 )
 
 
@@ -260,8 +212,8 @@ _TPUNREGISTERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=502,
-  serialized_end=523,
+  serialized_start=292,
+  serialized_end=313,
 )
 
 
@@ -292,8 +244,8 @@ _TPUNREGISTERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=525,
-  serialized_end=640,
+  serialized_start=315,
+  serialized_end=430,
 )
 
 
@@ -332,13 +284,6 @@ _TPPROCESSREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='header_bytes', full_name='TpProcessRequest.header_bytes', index=4,
-      number=5, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -351,8 +296,8 @@ _TPPROCESSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=643,
-  serialized_end=775,
+  serialized_start=432,
+  serialized_end=542,
 )
 
 
@@ -397,12 +342,10 @@ _TPPROCESSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=778,
-  serialized_end=961,
+  serialized_start=545,
+  serialized_end=728,
 )
 
-_TPREGISTERREQUEST.fields_by_name['request_header_style'].enum_type = _TPREGISTERREQUEST_TPPROCESSREQUESTHEADERSTYLE
-_TPREGISTERREQUEST_TPPROCESSREQUESTHEADERSTYLE.containing_type = _TPREGISTERREQUEST
 _TPREGISTERRESPONSE.fields_by_name['status'].enum_type = _TPREGISTERRESPONSE_STATUS
 _TPREGISTERRESPONSE_STATUS.containing_type = _TPREGISTERRESPONSE
 _TPUNREGISTERRESPONSE.fields_by_name['status'].enum_type = _TPUNREGISTERRESPONSE_STATUS

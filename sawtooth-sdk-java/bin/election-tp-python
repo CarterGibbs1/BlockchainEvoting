@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+#
 # Copyright 2017 Intel Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,8 +30,6 @@ sys.path.insert(0, os.path.join(
 sys.path.insert(0, os.path.join(
     os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
     'examples', 'election_basic'))
-    
-#sys.path.append('/project/sawtooth-core/examples')
 
 from basic_election.election_cli import main_wrapper
 

@@ -1,4 +1,12 @@
-sawtooth/examples/election_basic/BasicElectionHandler$TransactionData.class
-sawtooth/examples/election_basic/BasicElectionHandler.class
-sawtooth/examples/election_basic/ElectionBasicTransactionProcessor.class
-sawtooth/examples/election_basic/BasicElectionHandler$ElectionData.class
+election_basic/ElectionBasicTransactionProcessor.class
+election_basic/BasicElectionHandler$TransactionData.class
+election_basic/BasicElectionHandler.class
+election_basic/Paillier/PaillierRingParameters.class
+election_basic/Paillier/KeyPair.class
+election_basic/Paillier/PaillierRing.class
+election_basic/Paillier/KeyPairBuilder.class
+election_basic/Paillier/Election.class
+election_basic/BasicElectionHandler$ElectionData.class
+election_basic/Paillier/PaillierCipherText.class
+election_basic/Paillier/PaillierPublicKey.class
+election_basic/Paillier/PaillierPrivateKey.class

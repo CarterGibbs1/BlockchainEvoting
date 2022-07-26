@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n%sawtooth_sdk/protobuf/consensus.proto\"|\n\x1a\x43onsensusPeerMessageHeader\x12\x11\n\tsigner_id\x18\x01 \x01(\x0c\x12\x16\n\x0e\x63ontent_sha512\x18\x02 \x01(\x0c\x12\x14\n\x0cmessage_type\x18\x05 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0f\n\x07version\x18\x04 \x01(\t\"Q\n\x14\x43onsensusPeerMessage\x12\x0e\n\x06header\x18\x01 \x01(\x0c\x12\x18\n\x10header_signature\x18\x03 \x01(\x0c\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\x0c\"\x7f\n\x0e\x43onsensusBlock\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\x12\x13\n\x0bprevious_id\x18\x02 \x01(\x0c\x12\x11\n\tsigner_id\x18\x03 \x01(\x0c\x12\x11\n\tblock_num\x18\x04 \x01(\x04\x12\x0f\n\x07payload\x18\x05 \x01(\x0c\x12\x0f\n\x07summary\x18\x06 \x01(\x0c\"$\n\x11\x43onsensusPeerInfo\x12\x0f\n\x07peer_id\x18\x01 \x01(\x0c\"4\n\x16\x43onsensusSettingsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"4\n\x13\x43onsensusStateEntry\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\xa6\x01\n\x18\x43onsensusRegisterRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\x12@\n\x14\x61\x64\x64itional_protocols\x18\x03 \x03(\x0b\x32\".ConsensusRegisterRequest.Protocol\x1a)\n\x08Protocol\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\"\x9a\x02\n\x19\x43onsensusRegisterResponse\x12\x31\n\x06status\x18\x01 \x01(\x0e\x32!.ConsensusRegisterResponse.Status\x12#\n\nchain_head\x18\x02 \x01(\x0b\x32\x0f.ConsensusBlock\x12!\n\x05peers\x18\x03 \x03(\x0b\x32\x12.ConsensusPeerInfo\x12+\n\x0flocal_peer_info\x18\x04 \x01(\x0b\x32\x12.ConsensusPeerInfo\"U\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\"E\n\x1c\x43onsensusNotifyPeerConnected\x12%\n\tpeer_info\x18\x01 \x01(\x0b\x32\x12.ConsensusPeerInfo\"2\n\x1f\x43onsensusNotifyPeerDisconnected\x12\x0f\n\x07peer_id\x18\x01 \x01(\x0c\"W\n\x1a\x43onsensusNotifyPeerMessage\x12&\n\x07message\x18\x01 \x01(\x0b\x32\x15.ConsensusPeerMessage\x12\x11\n\tsender_id\x18\x02 \x01(\x0c\"9\n\x17\x43onsensusNotifyBlockNew\x12\x1e\n\x05\x62lock\x18\x01 \x01(\x0b\x32\x0f.ConsensusBlock\"-\n\x19\x43onsensusNotifyBlockValid\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\"/\n\x1b\x43onsensusNotifyBlockInvalid\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\".\n\x1a\x43onsensusNotifyBlockCommit\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\"\x95\x01\n\x1e\x43onsensusNotifyEngineActivated\x12#\n\nchain_head\x18\x01 \x01(\x0b\x32\x0f.ConsensusBlock\x12!\n\x05peers\x18\x02 \x03(\x0b\x32\x12.ConsensusPeerInfo\x12+\n\x0flocal_peer_info\x18\x03 \x01(\x0b\x32\x12.ConsensusPeerInfo\"\"\n ConsensusNotifyEngineDeactivated\"\x14\n\x12\x43onsensusNotifyAck\"T\n\x16\x43onsensusSendToRequest\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x12\x14\n\x0cmessage_type\x18\x03 \x01(\t\x12\x13\n\x0breceiver_id\x18\x02 \x01(\x0c\"\xca\x01\n\x17\x43onsensusSendToResponse\x12/\n\x06status\x18\x01 \x01(\x0e\x32\x1f.ConsensusSendToResponse.Status\"~\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x10\n\x0cUNKNOWN_PEER\x10\x05\x12\x15\n\x11NOT_ACTIVE_ENGINE\x10\x06\"B\n\x19\x43onsensusBroadcastRequest\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x12\x14\n\x0cmessage_type\x18\x02 \x01(\t\"\xbe\x01\n\x1a\x43onsensusBroadcastResponse\x12\x32\n\x06status\x18\x01 \x01(\x0e\x32\".ConsensusBroadcastResponse.Status\"l\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x15\n\x11NOT_ACTIVE_ENGINE\x10\x05\"6\n\x1f\x43onsensusInitializeBlockRequest\x12\x13\n\x0bprevious_id\x18\x01 \x01(\x0c\"\xf1\x01\n ConsensusInitializeBlockResponse\x12\x38\n\x06status\x18\x01 \x01(\x0e\x32(.ConsensusInitializeBlockResponse.Status\"\x92\x01\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rINVALID_STATE\x10\x05\x12\x11\n\rUNKNOWN_BLOCK\x10\x06\x12\x15\n\x11NOT_ACTIVE_ENGINE\x10\x07\" \n\x1e\x43onsensusSummarizeBlockRequest\"\x82\x02\n\x1f\x43onsensusSummarizeBlockResponse\x12\x37\n\x06status\x18\x01 \x01(\x0e\x32\'.ConsensusSummarizeBlockResponse.Status\x12\x0f\n\x07summary\x18\x02 \x01(\x0c\"\x94\x01\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rINVALID_STATE\x10\x05\x12\x13\n\x0f\x42LOCK_NOT_READY\x10\x06\x12\x15\n\x11NOT_ACTIVE_ENGINE\x10\x07\"-\n\x1d\x43onsensusFinalizeBlockRequest\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\"\x81\x02\n\x1e\x43onsensusFinalizeBlockResponse\x12\x36\n\x06status\x18\x01 \x01(\x0e\x32&.ConsensusFinalizeBlockResponse.Status\x12\x10\n\x08\x62lock_id\x18\x02 \x01(\x0c\"\x94\x01\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rINVALID_STATE\x10\x05\x12\x13\n\x0f\x42LOCK_NOT_READY\x10\x06\x12\x15\n\x11NOT_ACTIVE_ENGINE\x10\x07\"\x1d\n\x1b\x43onsensusCancelBlockRequest\"\xd5\x01\n\x1c\x43onsensusCancelBlockResponse\x12\x34\n\x06status\x18\x01 \x01(\x0e\x32$.ConsensusCancelBlockResponse.Status\"\x7f\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rINVALID_STATE\x10\x05\x12\x15\n\x11NOT_ACTIVE_ENGINE\x10\x06\"0\n\x1b\x43onsensusCheckBlocksRequest\x12\x11\n\tblock_ids\x18\x01 \x03(\x0c\"\xd5\x01\n\x1c\x43onsensusCheckBlocksResponse\x12\x34\n\x06status\x18\x01 \x01(\x0e\x32$.ConsensusCheckBlocksResponse.Status\"\x7f\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rUNKNOWN_BLOCK\x10\x05\x12\x15\n\x11NOT_ACTIVE_ENGINE\x10\x06\"/\n\x1b\x43onsensusCommitBlockRequest\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\"\xd5\x01\n\x1c\x43onsensusCommitBlockResponse\x12\x34\n\x06status\x18\x01 \x01(\x0e\x32$.ConsensusCommitBlockResponse.Status\"\x7f\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rUNKNOWN_BLOCK\x10\x05\x12\x15\n\x11NOT_ACTIVE_ENGINE\x10\x06\"/\n\x1b\x43onsensusIgnoreBlockRequest\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\"\xd5\x01\n\x1c\x43onsensusIgnoreBlockResponse\x12\x34\n\x06status\x18\x01 \x01(\x0e\x32$.ConsensusIgnoreBlockResponse.Status\"\x7f\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rUNKNOWN_BLOCK\x10\x05\x12\x15\n\x11NOT_ACTIVE_ENGINE\x10\x06\"-\n\x19\x43onsensusFailBlockRequest\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\"\xd1\x01\n\x1a\x43onsensusFailBlockResponse\x12\x32\n\x06status\x18\x01 \x01(\x0e\x32\".ConsensusFailBlockResponse.Status\"\x7f\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rUNKNOWN_BLOCK\x10\x05\x12\x15\n\x11NOT_ACTIVE_ENGINE\x10\x06\".\n\x19\x43onsensusBlocksGetRequest\x12\x11\n\tblock_ids\x18\x01 \x03(\x0c\"\xf2\x01\n\x1a\x43onsensusBlocksGetResponse\x12\x32\n\x06status\x18\x01 \x01(\x0e\x32\".ConsensusBlocksGetResponse.Status\x12\x1f\n\x06\x62locks\x18\x02 \x03(\x0b\x32\x0f.ConsensusBlock\"\x7f\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rUNKNOWN_BLOCK\x10\x05\x12\x15\n\x11NOT_ACTIVE_ENGINE\x10\x06\"\x1e\n\x1c\x43onsensusChainHeadGetRequest\"\xf7\x01\n\x1d\x43onsensusChainHeadGetResponse\x12\x35\n\x06status\x18\x01 \x01(\x0e\x32%.ConsensusChainHeadGetResponse.Status\x12\x1e\n\x05\x62lock\x18\x02 \x01(\x0b\x32\x0f.ConsensusBlock\"\x7f\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rNO_CHAIN_HEAD\x10\x05\x12\x15\n\x11NOT_ACTIVE_ENGINE\x10\x06\"=\n\x1b\x43onsensusSettingsGetRequest\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\x12\x0c\n\x04keys\x18\x02 \x03(\t\"\xff\x01\n\x1c\x43onsensusSettingsGetResponse\x12\x34\n\x06status\x18\x01 \x01(\x0e\x32$.ConsensusSettingsGetResponse.Status\x12(\n\x07\x65ntries\x18\x02 \x03(\x0b\x32\x17.ConsensusSettingsEntry\"\x7f\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rUNKNOWN_BLOCK\x10\x05\x12\x15\n\x11NOT_ACTIVE_ENGINE\x10\x06\"?\n\x18\x43onsensusStateGetRequest\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\x12\x11\n\taddresses\x18\x02 \x03(\t\"\xf6\x01\n\x19\x43onsensusStateGetResponse\x12\x31\n\x06status\x18\x01 \x01(\x0e\x32!.ConsensusStateGetResponse.Status\x12%\n\x07\x65ntries\x18\x02 \x03(\x0b\x32\x14.ConsensusStateEntry\"\x7f\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rUNKNOWN_BLOCK\x10\x05\x12\x15\n\x11NOT_ACTIVE_ENGINE\x10\x06\x62\x06proto3')
+  serialized_pb=_b('\n%sawtooth_sdk/protobuf/consensus.proto\"\\\n\x14\x43onsensusPeerMessage\x12\x14\n\x0cmessage_type\x18\x01 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\x0c\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0f\n\x07version\x18\x04 \x01(\t\"n\n\x0e\x43onsensusBlock\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\x12\x13\n\x0bprevious_id\x18\x02 \x01(\x0c\x12\x11\n\tsigner_id\x18\x03 \x01(\x0c\x12\x11\n\tblock_num\x18\x04 \x01(\x04\x12\x0f\n\x07payload\x18\x05 \x01(\x0c\"$\n\x11\x43onsensusPeerInfo\x12\x0f\n\x07peer_id\x18\x01 \x01(\x0c\"4\n\x16\x43onsensusSettingsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"4\n\x13\x43onsensusStateEntry\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"9\n\x18\x43onsensusRegisterRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\"\xa5\x01\n\x19\x43onsensusRegisterResponse\x12\x31\n\x06status\x18\x01 \x01(\x0e\x32!.ConsensusRegisterResponse.Status\"U\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\"E\n\x1c\x43onsensusNotifyPeerConnected\x12%\n\tpeer_info\x18\x01 \x01(\x0b\x32\x12.ConsensusPeerInfo\"2\n\x1f\x43onsensusNotifyPeerDisconnected\x12\x0f\n\x07peer_id\x18\x01 \x01(\x0c\"D\n\x1a\x43onsensusNotifyPeerMessage\x12&\n\x07message\x18\x01 \x01(\x0b\x32\x15.ConsensusPeerMessage\"9\n\x17\x43onsensusNotifyBlockNew\x12\x1e\n\x05\x62lock\x18\x01 \x01(\x0b\x32\x0f.ConsensusBlock\"-\n\x19\x43onsensusNotifyBlockValid\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\"/\n\x1b\x43onsensusNotifyBlockInvalid\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\".\n\x1a\x43onsensusNotifyBlockCommit\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\"\x14\n\x12\x43onsensusNotifyAck\"Q\n\x16\x43onsensusSendToRequest\x12&\n\x07message\x18\x01 \x01(\x0b\x32\x15.ConsensusPeerMessage\x12\x0f\n\x07peer_id\x18\x02 \x01(\x0c\"\xb3\x01\n\x17\x43onsensusSendToResponse\x12/\n\x06status\x18\x01 \x01(\x0e\x32\x1f.ConsensusSendToResponse.Status\"g\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x10\n\x0cUNKNOWN_PEER\x10\x05\"C\n\x19\x43onsensusBroadcastRequest\x12&\n\x07message\x18\x01 \x01(\x0b\x32\x15.ConsensusPeerMessage\"\xa7\x01\n\x1a\x43onsensusBroadcastResponse\x12\x32\n\x06status\x18\x01 \x01(\x0e\x32\".ConsensusBroadcastResponse.Status\"U\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\"6\n\x1f\x43onsensusInitializeBlockRequest\x12\x13\n\x0bprevious_id\x18\x01 \x01(\x0c\"\xd9\x01\n ConsensusInitializeBlockResponse\x12\x38\n\x06status\x18\x01 \x01(\x0e\x32(.ConsensusInitializeBlockResponse.Status\"{\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rINVALID_STATE\x10\x05\x12\x11\n\rUNKNOWN_BLOCK\x10\x06\"-\n\x1d\x43onsensusFinalizeBlockRequest\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\"\xd4\x01\n\x1e\x43onsensusFinalizeBlockResponse\x12\x36\n\x06status\x18\x01 \x01(\x0e\x32&.ConsensusFinalizeBlockResponse.Status\x12\x10\n\x08\x62lock_id\x18\x02 \x01(\x0c\"h\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rINVALID_STATE\x10\x05\"\x1d\n\x1b\x43onsensusCancelBlockRequest\"\xbe\x01\n\x1c\x43onsensusCancelBlockResponse\x12\x34\n\x06status\x18\x01 \x01(\x0e\x32$.ConsensusCancelBlockResponse.Status\"h\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rINVALID_STATE\x10\x05\"/\n\x1a\x43onsensusCheckBlockRequest\x12\x11\n\tblock_ids\x18\x01 \x03(\x0c\"\xbc\x01\n\x1b\x43onsensusCheckBlockResponse\x12\x33\n\x06status\x18\x01 \x01(\x0e\x32#.ConsensusCheckBlockResponse.Status\"h\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rUNKNOWN_BLOCK\x10\x05\"/\n\x1b\x43onsensusCommitBlockRequest\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\"\xbe\x01\n\x1c\x43onsensusCommitBlockResponse\x12\x34\n\x06status\x18\x01 \x01(\x0e\x32$.ConsensusCommitBlockResponse.Status\"h\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rUNKNOWN_BLOCK\x10\x05\"/\n\x1b\x43onsensusIgnoreBlockRequest\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\"\xbe\x01\n\x1c\x43onsensusIgnoreBlockResponse\x12\x34\n\x06status\x18\x01 \x01(\x0e\x32$.ConsensusIgnoreBlockResponse.Status\"h\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rUNKNOWN_BLOCK\x10\x05\"-\n\x19\x43onsensusFailBlockRequest\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\"\xba\x01\n\x1a\x43onsensusFailBlockResponse\x12\x32\n\x06status\x18\x01 \x01(\x0e\x32\".ConsensusFailBlockResponse.Status\"h\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rUNKNOWN_BLOCK\x10\x05\".\n\x19\x43onsensusBlocksGetRequest\x12\x11\n\tblock_ids\x18\x01 \x03(\x0c\"\xdb\x01\n\x1a\x43onsensusBlocksGetResponse\x12\x32\n\x06status\x18\x01 \x01(\x0e\x32\".ConsensusBlocksGetResponse.Status\x12\x1f\n\x06\x62locks\x18\x02 \x03(\x0b\x32\x0f.ConsensusBlock\"h\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rUNKNOWN_BLOCK\x10\x05\"=\n\x1b\x43onsensusSettingsGetRequest\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\x12\x0c\n\x04keys\x18\x02 \x03(\t\"\xe8\x01\n\x1c\x43onsensusSettingsGetResponse\x12\x34\n\x06status\x18\x01 \x01(\x0e\x32$.ConsensusSettingsGetResponse.Status\x12(\n\x07\x65ntries\x18\x02 \x03(\x0b\x32\x17.ConsensusSettingsEntry\"h\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rUNKNOWN_BLOCK\x10\x05\"?\n\x18\x43onsensusStateGetRequest\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\x0c\x12\x11\n\taddresses\x18\x02 \x03(\t\"\xdf\x01\n\x19\x43onsensusStateGetResponse\x12\x31\n\x06status\x18\x01 \x01(\x0e\x32!.ConsensusStateGetResponse.Status\x12%\n\x07\x65ntries\x18\x02 \x03(\x0b\x32\x14.ConsensusStateEntry\"h\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x0f\n\x0b\x42\x41\x44_REQUEST\x10\x02\x12\x11\n\rSERVICE_ERROR\x10\x03\x12\r\n\tNOT_READY\x10\x04\x12\x11\n\rUNKNOWN_BLOCK\x10\x05\x62\x06proto3')
 )
 
 
@@ -53,8 +53,8 @@ _CONSENSUSREGISTERRESPONSE_STATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=892,
-  serialized_end=977,
+  serialized_start=533,
+  serialized_end=618,
 )
 _sym_db.RegisterEnumDescriptor(_CONSENSUSREGISTERRESPONSE_STATUS)
 
@@ -88,15 +88,11 @@ _CONSENSUSSENDTORESPONSE_STATUS = _descriptor.EnumDescriptor(
       name='UNKNOWN_PEER', index=5, number=5,
       serialized_options=None,
       type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACTIVE_ENGINE', index=6, number=6,
-      serialized_options=None,
-      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1767,
-  serialized_end=1893,
+  serialized_start=1198,
+  serialized_end=1301,
 )
 _sym_db.RegisterEnumDescriptor(_CONSENSUSSENDTORESPONSE_STATUS)
 
@@ -126,15 +122,11 @@ _CONSENSUSBROADCASTRESPONSE_STATUS = _descriptor.EnumDescriptor(
       name='NOT_READY', index=4, number=4,
       serialized_options=None,
       type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACTIVE_ENGINE', index=5, number=5,
-      serialized_options=None,
-      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2046,
-  serialized_end=2154,
+  serialized_start=533,
+  serialized_end=618,
 )
 _sym_db.RegisterEnumDescriptor(_CONSENSUSBROADCASTRESPONSE_STATUS)
 
@@ -172,63 +164,13 @@ _CONSENSUSINITIALIZEBLOCKRESPONSE_STATUS = _descriptor.EnumDescriptor(
       name='UNKNOWN_BLOCK', index=6, number=6,
       serialized_options=None,
       type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACTIVE_ENGINE', index=7, number=7,
-      serialized_options=None,
-      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2308,
-  serialized_end=2454,
+  serialized_start=1693,
+  serialized_end=1816,
 )
 _sym_db.RegisterEnumDescriptor(_CONSENSUSINITIALIZEBLOCKRESPONSE_STATUS)
-
-_CONSENSUSSUMMARIZEBLOCKRESPONSE_STATUS = _descriptor.EnumDescriptor(
-  name='Status',
-  full_name='ConsensusSummarizeBlockResponse.Status',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='STATUS_UNSET', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='OK', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='BAD_REQUEST', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='SERVICE_ERROR', index=3, number=3,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_READY', index=4, number=4,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='INVALID_STATE', index=5, number=5,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='BLOCK_NOT_READY', index=6, number=6,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACTIVE_ENGINE', index=7, number=7,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=2601,
-  serialized_end=2749,
-)
-_sym_db.RegisterEnumDescriptor(_CONSENSUSSUMMARIZEBLOCKRESPONSE_STATUS)
 
 _CONSENSUSFINALIZEBLOCKRESPONSE_STATUS = _descriptor.EnumDescriptor(
   name='Status',
@@ -260,19 +202,11 @@ _CONSENSUSFINALIZEBLOCKRESPONSE_STATUS = _descriptor.EnumDescriptor(
       name='INVALID_STATE', index=5, number=5,
       serialized_options=None,
       type=None),
-    _descriptor.EnumValueDescriptor(
-      name='BLOCK_NOT_READY', index=6, number=6,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACTIVE_ENGINE', index=7, number=7,
-      serialized_options=None,
-      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2601,
-  serialized_end=2749,
+  serialized_start=1693,
+  serialized_end=1797,
 )
 _sym_db.RegisterEnumDescriptor(_CONSENSUSFINALIZEBLOCKRESPONSE_STATUS)
 
@@ -306,21 +240,17 @@ _CONSENSUSCANCELBLOCKRESPONSE_STATUS = _descriptor.EnumDescriptor(
       name='INVALID_STATE', index=5, number=5,
       serialized_options=None,
       type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACTIVE_ENGINE', index=6, number=6,
-      serialized_options=None,
-      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3176,
-  serialized_end=3303,
+  serialized_start=1693,
+  serialized_end=1797,
 )
 _sym_db.RegisterEnumDescriptor(_CONSENSUSCANCELBLOCKRESPONSE_STATUS)
 
-_CONSENSUSCHECKBLOCKSRESPONSE_STATUS = _descriptor.EnumDescriptor(
+_CONSENSUSCHECKBLOCKRESPONSE_STATUS = _descriptor.EnumDescriptor(
   name='Status',
-  full_name='ConsensusCheckBlocksResponse.Status',
+  full_name='ConsensusCheckBlockResponse.Status',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -348,17 +278,13 @@ _CONSENSUSCHECKBLOCKSRESPONSE_STATUS = _descriptor.EnumDescriptor(
       name='UNKNOWN_BLOCK', index=5, number=5,
       serialized_options=None,
       type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACTIVE_ENGINE', index=6, number=6,
-      serialized_options=None,
-      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3442,
-  serialized_end=3569,
+  serialized_start=2438,
+  serialized_end=2542,
 )
-_sym_db.RegisterEnumDescriptor(_CONSENSUSCHECKBLOCKSRESPONSE_STATUS)
+_sym_db.RegisterEnumDescriptor(_CONSENSUSCHECKBLOCKRESPONSE_STATUS)
 
 _CONSENSUSCOMMITBLOCKRESPONSE_STATUS = _descriptor.EnumDescriptor(
   name='Status',
@@ -390,15 +316,11 @@ _CONSENSUSCOMMITBLOCKRESPONSE_STATUS = _descriptor.EnumDescriptor(
       name='UNKNOWN_BLOCK', index=5, number=5,
       serialized_options=None,
       type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACTIVE_ENGINE', index=6, number=6,
-      serialized_options=None,
-      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3442,
-  serialized_end=3569,
+  serialized_start=2438,
+  serialized_end=2542,
 )
 _sym_db.RegisterEnumDescriptor(_CONSENSUSCOMMITBLOCKRESPONSE_STATUS)
 
@@ -432,15 +354,11 @@ _CONSENSUSIGNOREBLOCKRESPONSE_STATUS = _descriptor.EnumDescriptor(
       name='UNKNOWN_BLOCK', index=5, number=5,
       serialized_options=None,
       type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACTIVE_ENGINE', index=6, number=6,
-      serialized_options=None,
-      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3442,
-  serialized_end=3569,
+  serialized_start=2438,
+  serialized_end=2542,
 )
 _sym_db.RegisterEnumDescriptor(_CONSENSUSIGNOREBLOCKRESPONSE_STATUS)
 
@@ -474,15 +392,11 @@ _CONSENSUSFAILBLOCKRESPONSE_STATUS = _descriptor.EnumDescriptor(
       name='UNKNOWN_BLOCK', index=5, number=5,
       serialized_options=None,
       type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACTIVE_ENGINE', index=6, number=6,
-      serialized_options=None,
-      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3442,
-  serialized_end=3569,
+  serialized_start=2438,
+  serialized_end=2542,
 )
 _sym_db.RegisterEnumDescriptor(_CONSENSUSFAILBLOCKRESPONSE_STATUS)
 
@@ -516,59 +430,13 @@ _CONSENSUSBLOCKSGETRESPONSE_STATUS = _descriptor.EnumDescriptor(
       name='UNKNOWN_BLOCK', index=5, number=5,
       serialized_options=None,
       type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACTIVE_ENGINE', index=6, number=6,
-      serialized_options=None,
-      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3442,
-  serialized_end=3569,
+  serialized_start=2438,
+  serialized_end=2542,
 )
 _sym_db.RegisterEnumDescriptor(_CONSENSUSBLOCKSGETRESPONSE_STATUS)
-
-_CONSENSUSCHAINHEADGETRESPONSE_STATUS = _descriptor.EnumDescriptor(
-  name='Status',
-  full_name='ConsensusChainHeadGetResponse.Status',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='STATUS_UNSET', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='OK', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='BAD_REQUEST', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='SERVICE_ERROR', index=3, number=3,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_READY', index=4, number=4,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NO_CHAIN_HEAD', index=5, number=5,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACTIVE_ENGINE', index=6, number=6,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=4806,
-  serialized_end=4933,
-)
-_sym_db.RegisterEnumDescriptor(_CONSENSUSCHAINHEADGETRESPONSE_STATUS)
 
 _CONSENSUSSETTINGSGETRESPONSE_STATUS = _descriptor.EnumDescriptor(
   name='Status',
@@ -600,15 +468,11 @@ _CONSENSUSSETTINGSGETRESPONSE_STATUS = _descriptor.EnumDescriptor(
       name='UNKNOWN_BLOCK', index=5, number=5,
       serialized_options=None,
       type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACTIVE_ENGINE', index=6, number=6,
-      serialized_options=None,
-      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3442,
-  serialized_end=3569,
+  serialized_start=2438,
+  serialized_end=2542,
 )
 _sym_db.RegisterEnumDescriptor(_CONSENSUSSETTINGSGETRESPONSE_STATUS)
 
@@ -642,56 +506,45 @@ _CONSENSUSSTATEGETRESPONSE_STATUS = _descriptor.EnumDescriptor(
       name='UNKNOWN_BLOCK', index=5, number=5,
       serialized_options=None,
       type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACTIVE_ENGINE', index=6, number=6,
-      serialized_options=None,
-      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3442,
-  serialized_end=3569,
+  serialized_start=2438,
+  serialized_end=2542,
 )
 _sym_db.RegisterEnumDescriptor(_CONSENSUSSTATEGETRESPONSE_STATUS)
 
 
-_CONSENSUSPEERMESSAGEHEADER = _descriptor.Descriptor(
-  name='ConsensusPeerMessageHeader',
-  full_name='ConsensusPeerMessageHeader',
+_CONSENSUSPEERMESSAGE = _descriptor.Descriptor(
+  name='ConsensusPeerMessage',
+  full_name='ConsensusPeerMessage',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='signer_id', full_name='ConsensusPeerMessageHeader.signer_id', index=0,
-      number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
+      name='message_type', full_name='ConsensusPeerMessage.message_type', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='content_sha512', full_name='ConsensusPeerMessageHeader.content_sha512', index=1,
+      name='content', full_name='ConsensusPeerMessage.content', index=1,
       number=2, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='message_type', full_name='ConsensusPeerMessageHeader.message_type', index=2,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='name', full_name='ConsensusPeerMessageHeader.name', index=3,
+      name='name', full_name='ConsensusPeerMessage.name', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='version', full_name='ConsensusPeerMessageHeader.version', index=4,
+      name='version', full_name='ConsensusPeerMessage.version', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -710,52 +563,7 @@ _CONSENSUSPEERMESSAGEHEADER = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=41,
-  serialized_end=165,
-)
-
-
-_CONSENSUSPEERMESSAGE = _descriptor.Descriptor(
-  name='ConsensusPeerMessage',
-  full_name='ConsensusPeerMessage',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='header', full_name='ConsensusPeerMessage.header', index=0,
-      number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='header_signature', full_name='ConsensusPeerMessage.header_signature', index=1,
-      number=3, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='content', full_name='ConsensusPeerMessage.content', index=2,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=167,
-  serialized_end=248,
+  serialized_end=133,
 )
 
 
@@ -801,13 +609,6 @@ _CONSENSUSBLOCK = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='summary', full_name='ConsensusBlock.summary', index=5,
-      number=6, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -820,8 +621,8 @@ _CONSENSUSBLOCK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=250,
-  serialized_end=377,
+  serialized_start=135,
+  serialized_end=245,
 )
 
 
@@ -851,8 +652,8 @@ _CONSENSUSPEERINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=379,
-  serialized_end=415,
+  serialized_start=247,
+  serialized_end=283,
 )
 
 
@@ -889,8 +690,8 @@ _CONSENSUSSETTINGSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=417,
-  serialized_end=469,
+  serialized_start=285,
+  serialized_end=337,
 )
 
 
@@ -927,47 +728,10 @@ _CONSENSUSSTATEENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=471,
-  serialized_end=523,
+  serialized_start=339,
+  serialized_end=391,
 )
 
-
-_CONSENSUSREGISTERREQUEST_PROTOCOL = _descriptor.Descriptor(
-  name='Protocol',
-  full_name='ConsensusRegisterRequest.Protocol',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='ConsensusRegisterRequest.Protocol.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='version', full_name='ConsensusRegisterRequest.Protocol.version', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=651,
-  serialized_end=692,
-)
 
 _CONSENSUSREGISTERREQUEST = _descriptor.Descriptor(
   name='ConsensusRegisterRequest',
@@ -990,17 +754,10 @@ _CONSENSUSREGISTERREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='additional_protocols', full_name='ConsensusRegisterRequest.additional_protocols', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
-  nested_types=[_CONSENSUSREGISTERREQUEST_PROTOCOL, ],
+  nested_types=[],
   enum_types=[
   ],
   serialized_options=None,
@@ -1009,8 +766,8 @@ _CONSENSUSREGISTERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=526,
-  serialized_end=692,
+  serialized_start=393,
+  serialized_end=450,
 )
 
 
@@ -1028,27 +785,6 @@ _CONSENSUSREGISTERRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='chain_head', full_name='ConsensusRegisterResponse.chain_head', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='peers', full_name='ConsensusRegisterResponse.peers', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='local_peer_info', full_name='ConsensusRegisterResponse.local_peer_info', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -1062,8 +798,8 @@ _CONSENSUSREGISTERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=695,
-  serialized_end=977,
+  serialized_start=453,
+  serialized_end=618,
 )
 
 
@@ -1093,8 +829,8 @@ _CONSENSUSNOTIFYPEERCONNECTED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=979,
-  serialized_end=1048,
+  serialized_start=620,
+  serialized_end=689,
 )
 
 
@@ -1124,8 +860,8 @@ _CONSENSUSNOTIFYPEERDISCONNECTED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1050,
-  serialized_end=1100,
+  serialized_start=691,
+  serialized_end=741,
 )
 
 
@@ -1143,13 +879,6 @@ _CONSENSUSNOTIFYPEERMESSAGE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='sender_id', full_name='ConsensusNotifyPeerMessage.sender_id', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -1162,8 +891,8 @@ _CONSENSUSNOTIFYPEERMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1102,
-  serialized_end=1189,
+  serialized_start=743,
+  serialized_end=811,
 )
 
 
@@ -1193,8 +922,8 @@ _CONSENSUSNOTIFYBLOCKNEW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1191,
-  serialized_end=1248,
+  serialized_start=813,
+  serialized_end=870,
 )
 
 
@@ -1224,8 +953,8 @@ _CONSENSUSNOTIFYBLOCKVALID = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1250,
-  serialized_end=1295,
+  serialized_start=872,
+  serialized_end=917,
 )
 
 
@@ -1255,8 +984,8 @@ _CONSENSUSNOTIFYBLOCKINVALID = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1297,
-  serialized_end=1344,
+  serialized_start=919,
+  serialized_end=966,
 )
 
 
@@ -1286,77 +1015,8 @@ _CONSENSUSNOTIFYBLOCKCOMMIT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1346,
-  serialized_end=1392,
-)
-
-
-_CONSENSUSNOTIFYENGINEACTIVATED = _descriptor.Descriptor(
-  name='ConsensusNotifyEngineActivated',
-  full_name='ConsensusNotifyEngineActivated',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='chain_head', full_name='ConsensusNotifyEngineActivated.chain_head', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='peers', full_name='ConsensusNotifyEngineActivated.peers', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='local_peer_info', full_name='ConsensusNotifyEngineActivated.local_peer_info', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1395,
-  serialized_end=1544,
-)
-
-
-_CONSENSUSNOTIFYENGINEDEACTIVATED = _descriptor.Descriptor(
-  name='ConsensusNotifyEngineDeactivated',
-  full_name='ConsensusNotifyEngineDeactivated',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1546,
-  serialized_end=1580,
+  serialized_start=968,
+  serialized_end=1014,
 )
 
 
@@ -1379,8 +1039,8 @@ _CONSENSUSNOTIFYACK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1582,
-  serialized_end=1602,
+  serialized_start=1016,
+  serialized_end=1036,
 )
 
 
@@ -1392,21 +1052,14 @@ _CONSENSUSSENDTOREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='content', full_name='ConsensusSendToRequest.content', index=0,
-      number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
+      name='message', full_name='ConsensusSendToRequest.message', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='message_type', full_name='ConsensusSendToRequest.message_type', index=1,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='receiver_id', full_name='ConsensusSendToRequest.receiver_id', index=2,
+      name='peer_id', full_name='ConsensusSendToRequest.peer_id', index=1,
       number=2, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
@@ -1424,8 +1077,8 @@ _CONSENSUSSENDTOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1604,
-  serialized_end=1688,
+  serialized_start=1038,
+  serialized_end=1119,
 )
 
 
@@ -1456,8 +1109,8 @@ _CONSENSUSSENDTORESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1691,
-  serialized_end=1893,
+  serialized_start=1122,
+  serialized_end=1301,
 )
 
 
@@ -1469,16 +1122,9 @@ _CONSENSUSBROADCASTREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='content', full_name='ConsensusBroadcastRequest.content', index=0,
-      number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='message_type', full_name='ConsensusBroadcastRequest.message_type', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='message', full_name='ConsensusBroadcastRequest.message', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -1494,8 +1140,8 @@ _CONSENSUSBROADCASTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1895,
-  serialized_end=1961,
+  serialized_start=1303,
+  serialized_end=1370,
 )
 
 
@@ -1526,8 +1172,8 @@ _CONSENSUSBROADCASTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1964,
-  serialized_end=2154,
+  serialized_start=1373,
+  serialized_end=1540,
 )
 
 
@@ -1557,8 +1203,8 @@ _CONSENSUSINITIALIZEBLOCKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2156,
-  serialized_end=2210,
+  serialized_start=1542,
+  serialized_end=1596,
 )
 
 
@@ -1589,71 +1235,8 @@ _CONSENSUSINITIALIZEBLOCKRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2213,
-  serialized_end=2454,
-)
-
-
-_CONSENSUSSUMMARIZEBLOCKREQUEST = _descriptor.Descriptor(
-  name='ConsensusSummarizeBlockRequest',
-  full_name='ConsensusSummarizeBlockRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2456,
-  serialized_end=2488,
-)
-
-
-_CONSENSUSSUMMARIZEBLOCKRESPONSE = _descriptor.Descriptor(
-  name='ConsensusSummarizeBlockResponse',
-  full_name='ConsensusSummarizeBlockResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='status', full_name='ConsensusSummarizeBlockResponse.status', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='summary', full_name='ConsensusSummarizeBlockResponse.summary', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _CONSENSUSSUMMARIZEBLOCKRESPONSE_STATUS,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2491,
-  serialized_end=2749,
+  serialized_start=1599,
+  serialized_end=1816,
 )
 
 
@@ -1683,8 +1266,8 @@ _CONSENSUSFINALIZEBLOCKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2751,
-  serialized_end=2796,
+  serialized_start=1818,
+  serialized_end=1863,
 )
 
 
@@ -1722,8 +1305,8 @@ _CONSENSUSFINALIZEBLOCKRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2799,
-  serialized_end=3056,
+  serialized_start=1866,
+  serialized_end=2078,
 )
 
 
@@ -1746,8 +1329,8 @@ _CONSENSUSCANCELBLOCKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3058,
-  serialized_end=3087,
+  serialized_start=2080,
+  serialized_end=2109,
 )
 
 
@@ -1778,20 +1361,20 @@ _CONSENSUSCANCELBLOCKRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3090,
-  serialized_end=3303,
+  serialized_start=2112,
+  serialized_end=2302,
 )
 
 
-_CONSENSUSCHECKBLOCKSREQUEST = _descriptor.Descriptor(
-  name='ConsensusCheckBlocksRequest',
-  full_name='ConsensusCheckBlocksRequest',
+_CONSENSUSCHECKBLOCKREQUEST = _descriptor.Descriptor(
+  name='ConsensusCheckBlockRequest',
+  full_name='ConsensusCheckBlockRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='block_ids', full_name='ConsensusCheckBlocksRequest.block_ids', index=0,
+      name='block_ids', full_name='ConsensusCheckBlockRequest.block_ids', index=0,
       number=1, type=12, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1809,20 +1392,20 @@ _CONSENSUSCHECKBLOCKSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3305,
-  serialized_end=3353,
+  serialized_start=2304,
+  serialized_end=2351,
 )
 
 
-_CONSENSUSCHECKBLOCKSRESPONSE = _descriptor.Descriptor(
-  name='ConsensusCheckBlocksResponse',
-  full_name='ConsensusCheckBlocksResponse',
+_CONSENSUSCHECKBLOCKRESPONSE = _descriptor.Descriptor(
+  name='ConsensusCheckBlockResponse',
+  full_name='ConsensusCheckBlockResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='status', full_name='ConsensusCheckBlocksResponse.status', index=0,
+      name='status', full_name='ConsensusCheckBlockResponse.status', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -1833,7 +1416,7 @@ _CONSENSUSCHECKBLOCKSRESPONSE = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _CONSENSUSCHECKBLOCKSRESPONSE_STATUS,
+    _CONSENSUSCHECKBLOCKRESPONSE_STATUS,
   ],
   serialized_options=None,
   is_extendable=False,
@@ -1841,8 +1424,8 @@ _CONSENSUSCHECKBLOCKSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3356,
-  serialized_end=3569,
+  serialized_start=2354,
+  serialized_end=2542,
 )
 
 
@@ -1872,8 +1455,8 @@ _CONSENSUSCOMMITBLOCKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3571,
-  serialized_end=3618,
+  serialized_start=2544,
+  serialized_end=2591,
 )
 
 
@@ -1904,8 +1487,8 @@ _CONSENSUSCOMMITBLOCKRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3621,
-  serialized_end=3834,
+  serialized_start=2594,
+  serialized_end=2784,
 )
 
 
@@ -1935,8 +1518,8 @@ _CONSENSUSIGNOREBLOCKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3836,
-  serialized_end=3883,
+  serialized_start=2786,
+  serialized_end=2833,
 )
 
 
@@ -1967,8 +1550,8 @@ _CONSENSUSIGNOREBLOCKRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3886,
-  serialized_end=4099,
+  serialized_start=2836,
+  serialized_end=3026,
 )
 
 
@@ -1998,8 +1581,8 @@ _CONSENSUSFAILBLOCKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4101,
-  serialized_end=4146,
+  serialized_start=3028,
+  serialized_end=3073,
 )
 
 
@@ -2030,8 +1613,8 @@ _CONSENSUSFAILBLOCKRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4149,
-  serialized_end=4358,
+  serialized_start=3076,
+  serialized_end=3262,
 )
 
 
@@ -2061,8 +1644,8 @@ _CONSENSUSBLOCKSGETREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4360,
-  serialized_end=4406,
+  serialized_start=3264,
+  serialized_end=3310,
 )
 
 
@@ -2100,71 +1683,8 @@ _CONSENSUSBLOCKSGETRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4409,
-  serialized_end=4651,
-)
-
-
-_CONSENSUSCHAINHEADGETREQUEST = _descriptor.Descriptor(
-  name='ConsensusChainHeadGetRequest',
-  full_name='ConsensusChainHeadGetRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=4653,
-  serialized_end=4683,
-)
-
-
-_CONSENSUSCHAINHEADGETRESPONSE = _descriptor.Descriptor(
-  name='ConsensusChainHeadGetResponse',
-  full_name='ConsensusChainHeadGetResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='status', full_name='ConsensusChainHeadGetResponse.status', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='block', full_name='ConsensusChainHeadGetResponse.block', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _CONSENSUSCHAINHEADGETRESPONSE_STATUS,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=4686,
-  serialized_end=4933,
+  serialized_start=3313,
+  serialized_end=3532,
 )
 
 
@@ -2201,8 +1721,8 @@ _CONSENSUSSETTINGSGETREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4935,
-  serialized_end=4996,
+  serialized_start=3534,
+  serialized_end=3595,
 )
 
 
@@ -2240,8 +1760,8 @@ _CONSENSUSSETTINGSGETRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4999,
-  serialized_end=5254,
+  serialized_start=3598,
+  serialized_end=3830,
 )
 
 
@@ -2278,8 +1798,8 @@ _CONSENSUSSTATEGETREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5256,
-  serialized_end=5319,
+  serialized_start=3832,
+  serialized_end=3895,
 )
 
 
@@ -2317,37 +1837,29 @@ _CONSENSUSSTATEGETRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5322,
-  serialized_end=5568,
+  serialized_start=3898,
+  serialized_end=4121,
 )
 
-_CONSENSUSREGISTERREQUEST_PROTOCOL.containing_type = _CONSENSUSREGISTERREQUEST
-_CONSENSUSREGISTERREQUEST.fields_by_name['additional_protocols'].message_type = _CONSENSUSREGISTERREQUEST_PROTOCOL
 _CONSENSUSREGISTERRESPONSE.fields_by_name['status'].enum_type = _CONSENSUSREGISTERRESPONSE_STATUS
-_CONSENSUSREGISTERRESPONSE.fields_by_name['chain_head'].message_type = _CONSENSUSBLOCK
-_CONSENSUSREGISTERRESPONSE.fields_by_name['peers'].message_type = _CONSENSUSPEERINFO
-_CONSENSUSREGISTERRESPONSE.fields_by_name['local_peer_info'].message_type = _CONSENSUSPEERINFO
 _CONSENSUSREGISTERRESPONSE_STATUS.containing_type = _CONSENSUSREGISTERRESPONSE
 _CONSENSUSNOTIFYPEERCONNECTED.fields_by_name['peer_info'].message_type = _CONSENSUSPEERINFO
 _CONSENSUSNOTIFYPEERMESSAGE.fields_by_name['message'].message_type = _CONSENSUSPEERMESSAGE
 _CONSENSUSNOTIFYBLOCKNEW.fields_by_name['block'].message_type = _CONSENSUSBLOCK
-_CONSENSUSNOTIFYENGINEACTIVATED.fields_by_name['chain_head'].message_type = _CONSENSUSBLOCK
-_CONSENSUSNOTIFYENGINEACTIVATED.fields_by_name['peers'].message_type = _CONSENSUSPEERINFO
-_CONSENSUSNOTIFYENGINEACTIVATED.fields_by_name['local_peer_info'].message_type = _CONSENSUSPEERINFO
+_CONSENSUSSENDTOREQUEST.fields_by_name['message'].message_type = _CONSENSUSPEERMESSAGE
 _CONSENSUSSENDTORESPONSE.fields_by_name['status'].enum_type = _CONSENSUSSENDTORESPONSE_STATUS
 _CONSENSUSSENDTORESPONSE_STATUS.containing_type = _CONSENSUSSENDTORESPONSE
+_CONSENSUSBROADCASTREQUEST.fields_by_name['message'].message_type = _CONSENSUSPEERMESSAGE
 _CONSENSUSBROADCASTRESPONSE.fields_by_name['status'].enum_type = _CONSENSUSBROADCASTRESPONSE_STATUS
 _CONSENSUSBROADCASTRESPONSE_STATUS.containing_type = _CONSENSUSBROADCASTRESPONSE
 _CONSENSUSINITIALIZEBLOCKRESPONSE.fields_by_name['status'].enum_type = _CONSENSUSINITIALIZEBLOCKRESPONSE_STATUS
 _CONSENSUSINITIALIZEBLOCKRESPONSE_STATUS.containing_type = _CONSENSUSINITIALIZEBLOCKRESPONSE
-_CONSENSUSSUMMARIZEBLOCKRESPONSE.fields_by_name['status'].enum_type = _CONSENSUSSUMMARIZEBLOCKRESPONSE_STATUS
-_CONSENSUSSUMMARIZEBLOCKRESPONSE_STATUS.containing_type = _CONSENSUSSUMMARIZEBLOCKRESPONSE
 _CONSENSUSFINALIZEBLOCKRESPONSE.fields_by_name['status'].enum_type = _CONSENSUSFINALIZEBLOCKRESPONSE_STATUS
 _CONSENSUSFINALIZEBLOCKRESPONSE_STATUS.containing_type = _CONSENSUSFINALIZEBLOCKRESPONSE
 _CONSENSUSCANCELBLOCKRESPONSE.fields_by_name['status'].enum_type = _CONSENSUSCANCELBLOCKRESPONSE_STATUS
 _CONSENSUSCANCELBLOCKRESPONSE_STATUS.containing_type = _CONSENSUSCANCELBLOCKRESPONSE
-_CONSENSUSCHECKBLOCKSRESPONSE.fields_by_name['status'].enum_type = _CONSENSUSCHECKBLOCKSRESPONSE_STATUS
-_CONSENSUSCHECKBLOCKSRESPONSE_STATUS.containing_type = _CONSENSUSCHECKBLOCKSRESPONSE
+_CONSENSUSCHECKBLOCKRESPONSE.fields_by_name['status'].enum_type = _CONSENSUSCHECKBLOCKRESPONSE_STATUS
+_CONSENSUSCHECKBLOCKRESPONSE_STATUS.containing_type = _CONSENSUSCHECKBLOCKRESPONSE
 _CONSENSUSCOMMITBLOCKRESPONSE.fields_by_name['status'].enum_type = _CONSENSUSCOMMITBLOCKRESPONSE_STATUS
 _CONSENSUSCOMMITBLOCKRESPONSE_STATUS.containing_type = _CONSENSUSCOMMITBLOCKRESPONSE
 _CONSENSUSIGNOREBLOCKRESPONSE.fields_by_name['status'].enum_type = _CONSENSUSIGNOREBLOCKRESPONSE_STATUS
@@ -2357,16 +1869,12 @@ _CONSENSUSFAILBLOCKRESPONSE_STATUS.containing_type = _CONSENSUSFAILBLOCKRESPONSE
 _CONSENSUSBLOCKSGETRESPONSE.fields_by_name['status'].enum_type = _CONSENSUSBLOCKSGETRESPONSE_STATUS
 _CONSENSUSBLOCKSGETRESPONSE.fields_by_name['blocks'].message_type = _CONSENSUSBLOCK
 _CONSENSUSBLOCKSGETRESPONSE_STATUS.containing_type = _CONSENSUSBLOCKSGETRESPONSE
-_CONSENSUSCHAINHEADGETRESPONSE.fields_by_name['status'].enum_type = _CONSENSUSCHAINHEADGETRESPONSE_STATUS
-_CONSENSUSCHAINHEADGETRESPONSE.fields_by_name['block'].message_type = _CONSENSUSBLOCK
-_CONSENSUSCHAINHEADGETRESPONSE_STATUS.containing_type = _CONSENSUSCHAINHEADGETRESPONSE
 _CONSENSUSSETTINGSGETRESPONSE.fields_by_name['status'].enum_type = _CONSENSUSSETTINGSGETRESPONSE_STATUS
 _CONSENSUSSETTINGSGETRESPONSE.fields_by_name['entries'].message_type = _CONSENSUSSETTINGSENTRY
 _CONSENSUSSETTINGSGETRESPONSE_STATUS.containing_type = _CONSENSUSSETTINGSGETRESPONSE
 _CONSENSUSSTATEGETRESPONSE.fields_by_name['status'].enum_type = _CONSENSUSSTATEGETRESPONSE_STATUS
 _CONSENSUSSTATEGETRESPONSE.fields_by_name['entries'].message_type = _CONSENSUSSTATEENTRY
 _CONSENSUSSTATEGETRESPONSE_STATUS.containing_type = _CONSENSUSSTATEGETRESPONSE
-DESCRIPTOR.message_types_by_name['ConsensusPeerMessageHeader'] = _CONSENSUSPEERMESSAGEHEADER
 DESCRIPTOR.message_types_by_name['ConsensusPeerMessage'] = _CONSENSUSPEERMESSAGE
 DESCRIPTOR.message_types_by_name['ConsensusBlock'] = _CONSENSUSBLOCK
 DESCRIPTOR.message_types_by_name['ConsensusPeerInfo'] = _CONSENSUSPEERINFO
@@ -2381,8 +1889,6 @@ DESCRIPTOR.message_types_by_name['ConsensusNotifyBlockNew'] = _CONSENSUSNOTIFYBL
 DESCRIPTOR.message_types_by_name['ConsensusNotifyBlockValid'] = _CONSENSUSNOTIFYBLOCKVALID
 DESCRIPTOR.message_types_by_name['ConsensusNotifyBlockInvalid'] = _CONSENSUSNOTIFYBLOCKINVALID
 DESCRIPTOR.message_types_by_name['ConsensusNotifyBlockCommit'] = _CONSENSUSNOTIFYBLOCKCOMMIT
-DESCRIPTOR.message_types_by_name['ConsensusNotifyEngineActivated'] = _CONSENSUSNOTIFYENGINEACTIVATED
-DESCRIPTOR.message_types_by_name['ConsensusNotifyEngineDeactivated'] = _CONSENSUSNOTIFYENGINEDEACTIVATED
 DESCRIPTOR.message_types_by_name['ConsensusNotifyAck'] = _CONSENSUSNOTIFYACK
 DESCRIPTOR.message_types_by_name['ConsensusSendToRequest'] = _CONSENSUSSENDTOREQUEST
 DESCRIPTOR.message_types_by_name['ConsensusSendToResponse'] = _CONSENSUSSENDTORESPONSE
@@ -2390,14 +1896,12 @@ DESCRIPTOR.message_types_by_name['ConsensusBroadcastRequest'] = _CONSENSUSBROADC
 DESCRIPTOR.message_types_by_name['ConsensusBroadcastResponse'] = _CONSENSUSBROADCASTRESPONSE
 DESCRIPTOR.message_types_by_name['ConsensusInitializeBlockRequest'] = _CONSENSUSINITIALIZEBLOCKREQUEST
 DESCRIPTOR.message_types_by_name['ConsensusInitializeBlockResponse'] = _CONSENSUSINITIALIZEBLOCKRESPONSE
-DESCRIPTOR.message_types_by_name['ConsensusSummarizeBlockRequest'] = _CONSENSUSSUMMARIZEBLOCKREQUEST
-DESCRIPTOR.message_types_by_name['ConsensusSummarizeBlockResponse'] = _CONSENSUSSUMMARIZEBLOCKRESPONSE
 DESCRIPTOR.message_types_by_name['ConsensusFinalizeBlockRequest'] = _CONSENSUSFINALIZEBLOCKREQUEST
 DESCRIPTOR.message_types_by_name['ConsensusFinalizeBlockResponse'] = _CONSENSUSFINALIZEBLOCKRESPONSE
 DESCRIPTOR.message_types_by_name['ConsensusCancelBlockRequest'] = _CONSENSUSCANCELBLOCKREQUEST
 DESCRIPTOR.message_types_by_name['ConsensusCancelBlockResponse'] = _CONSENSUSCANCELBLOCKRESPONSE
-DESCRIPTOR.message_types_by_name['ConsensusCheckBlocksRequest'] = _CONSENSUSCHECKBLOCKSREQUEST
-DESCRIPTOR.message_types_by_name['ConsensusCheckBlocksResponse'] = _CONSENSUSCHECKBLOCKSRESPONSE
+DESCRIPTOR.message_types_by_name['ConsensusCheckBlockRequest'] = _CONSENSUSCHECKBLOCKREQUEST
+DESCRIPTOR.message_types_by_name['ConsensusCheckBlockResponse'] = _CONSENSUSCHECKBLOCKRESPONSE
 DESCRIPTOR.message_types_by_name['ConsensusCommitBlockRequest'] = _CONSENSUSCOMMITBLOCKREQUEST
 DESCRIPTOR.message_types_by_name['ConsensusCommitBlockResponse'] = _CONSENSUSCOMMITBLOCKRESPONSE
 DESCRIPTOR.message_types_by_name['ConsensusIgnoreBlockRequest'] = _CONSENSUSIGNOREBLOCKREQUEST
@@ -2406,20 +1910,11 @@ DESCRIPTOR.message_types_by_name['ConsensusFailBlockRequest'] = _CONSENSUSFAILBL
 DESCRIPTOR.message_types_by_name['ConsensusFailBlockResponse'] = _CONSENSUSFAILBLOCKRESPONSE
 DESCRIPTOR.message_types_by_name['ConsensusBlocksGetRequest'] = _CONSENSUSBLOCKSGETREQUEST
 DESCRIPTOR.message_types_by_name['ConsensusBlocksGetResponse'] = _CONSENSUSBLOCKSGETRESPONSE
-DESCRIPTOR.message_types_by_name['ConsensusChainHeadGetRequest'] = _CONSENSUSCHAINHEADGETREQUEST
-DESCRIPTOR.message_types_by_name['ConsensusChainHeadGetResponse'] = _CONSENSUSCHAINHEADGETRESPONSE
 DESCRIPTOR.message_types_by_name['ConsensusSettingsGetRequest'] = _CONSENSUSSETTINGSGETREQUEST
 DESCRIPTOR.message_types_by_name['ConsensusSettingsGetResponse'] = _CONSENSUSSETTINGSGETRESPONSE
 DESCRIPTOR.message_types_by_name['ConsensusStateGetRequest'] = _CONSENSUSSTATEGETREQUEST
 DESCRIPTOR.message_types_by_name['ConsensusStateGetResponse'] = _CONSENSUSSTATEGETRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-ConsensusPeerMessageHeader = _reflection.GeneratedProtocolMessageType('ConsensusPeerMessageHeader', (_message.Message,), dict(
-  DESCRIPTOR = _CONSENSUSPEERMESSAGEHEADER,
-  __module__ = 'sawtooth_sdk.protobuf.consensus_pb2'
-  # @@protoc_insertion_point(class_scope:ConsensusPeerMessageHeader)
-  ))
-_sym_db.RegisterMessage(ConsensusPeerMessageHeader)
 
 ConsensusPeerMessage = _reflection.GeneratedProtocolMessageType('ConsensusPeerMessage', (_message.Message,), dict(
   DESCRIPTOR = _CONSENSUSPEERMESSAGE,
@@ -2457,19 +1952,11 @@ ConsensusStateEntry = _reflection.GeneratedProtocolMessageType('ConsensusStateEn
 _sym_db.RegisterMessage(ConsensusStateEntry)
 
 ConsensusRegisterRequest = _reflection.GeneratedProtocolMessageType('ConsensusRegisterRequest', (_message.Message,), dict(
-
-  Protocol = _reflection.GeneratedProtocolMessageType('Protocol', (_message.Message,), dict(
-    DESCRIPTOR = _CONSENSUSREGISTERREQUEST_PROTOCOL,
-    __module__ = 'sawtooth_sdk.protobuf.consensus_pb2'
-    # @@protoc_insertion_point(class_scope:ConsensusRegisterRequest.Protocol)
-    ))
-  ,
   DESCRIPTOR = _CONSENSUSREGISTERREQUEST,
   __module__ = 'sawtooth_sdk.protobuf.consensus_pb2'
   # @@protoc_insertion_point(class_scope:ConsensusRegisterRequest)
   ))
 _sym_db.RegisterMessage(ConsensusRegisterRequest)
-_sym_db.RegisterMessage(ConsensusRegisterRequest.Protocol)
 
 ConsensusRegisterResponse = _reflection.GeneratedProtocolMessageType('ConsensusRegisterResponse', (_message.Message,), dict(
   DESCRIPTOR = _CONSENSUSREGISTERRESPONSE,
@@ -2527,20 +2014,6 @@ ConsensusNotifyBlockCommit = _reflection.GeneratedProtocolMessageType('Consensus
   ))
 _sym_db.RegisterMessage(ConsensusNotifyBlockCommit)
 
-ConsensusNotifyEngineActivated = _reflection.GeneratedProtocolMessageType('ConsensusNotifyEngineActivated', (_message.Message,), dict(
-  DESCRIPTOR = _CONSENSUSNOTIFYENGINEACTIVATED,
-  __module__ = 'sawtooth_sdk.protobuf.consensus_pb2'
-  # @@protoc_insertion_point(class_scope:ConsensusNotifyEngineActivated)
-  ))
-_sym_db.RegisterMessage(ConsensusNotifyEngineActivated)
-
-ConsensusNotifyEngineDeactivated = _reflection.GeneratedProtocolMessageType('ConsensusNotifyEngineDeactivated', (_message.Message,), dict(
-  DESCRIPTOR = _CONSENSUSNOTIFYENGINEDEACTIVATED,
-  __module__ = 'sawtooth_sdk.protobuf.consensus_pb2'
-  # @@protoc_insertion_point(class_scope:ConsensusNotifyEngineDeactivated)
-  ))
-_sym_db.RegisterMessage(ConsensusNotifyEngineDeactivated)
-
 ConsensusNotifyAck = _reflection.GeneratedProtocolMessageType('ConsensusNotifyAck', (_message.Message,), dict(
   DESCRIPTOR = _CONSENSUSNOTIFYACK,
   __module__ = 'sawtooth_sdk.protobuf.consensus_pb2'
@@ -2590,20 +2063,6 @@ ConsensusInitializeBlockResponse = _reflection.GeneratedProtocolMessageType('Con
   ))
 _sym_db.RegisterMessage(ConsensusInitializeBlockResponse)
 
-ConsensusSummarizeBlockRequest = _reflection.GeneratedProtocolMessageType('ConsensusSummarizeBlockRequest', (_message.Message,), dict(
-  DESCRIPTOR = _CONSENSUSSUMMARIZEBLOCKREQUEST,
-  __module__ = 'sawtooth_sdk.protobuf.consensus_pb2'
-  # @@protoc_insertion_point(class_scope:ConsensusSummarizeBlockRequest)
-  ))
-_sym_db.RegisterMessage(ConsensusSummarizeBlockRequest)
-
-ConsensusSummarizeBlockResponse = _reflection.GeneratedProtocolMessageType('ConsensusSummarizeBlockResponse', (_message.Message,), dict(
-  DESCRIPTOR = _CONSENSUSSUMMARIZEBLOCKRESPONSE,
-  __module__ = 'sawtooth_sdk.protobuf.consensus_pb2'
-  # @@protoc_insertion_point(class_scope:ConsensusSummarizeBlockResponse)
-  ))
-_sym_db.RegisterMessage(ConsensusSummarizeBlockResponse)
-
 ConsensusFinalizeBlockRequest = _reflection.GeneratedProtocolMessageType('ConsensusFinalizeBlockRequest', (_message.Message,), dict(
   DESCRIPTOR = _CONSENSUSFINALIZEBLOCKREQUEST,
   __module__ = 'sawtooth_sdk.protobuf.consensus_pb2'
@@ -2632,19 +2091,19 @@ ConsensusCancelBlockResponse = _reflection.GeneratedProtocolMessageType('Consens
   ))
 _sym_db.RegisterMessage(ConsensusCancelBlockResponse)
 
-ConsensusCheckBlocksRequest = _reflection.GeneratedProtocolMessageType('ConsensusCheckBlocksRequest', (_message.Message,), dict(
-  DESCRIPTOR = _CONSENSUSCHECKBLOCKSREQUEST,
+ConsensusCheckBlockRequest = _reflection.GeneratedProtocolMessageType('ConsensusCheckBlockRequest', (_message.Message,), dict(
+  DESCRIPTOR = _CONSENSUSCHECKBLOCKREQUEST,
   __module__ = 'sawtooth_sdk.protobuf.consensus_pb2'
-  # @@protoc_insertion_point(class_scope:ConsensusCheckBlocksRequest)
+  # @@protoc_insertion_point(class_scope:ConsensusCheckBlockRequest)
   ))
-_sym_db.RegisterMessage(ConsensusCheckBlocksRequest)
+_sym_db.RegisterMessage(ConsensusCheckBlockRequest)
 
-ConsensusCheckBlocksResponse = _reflection.GeneratedProtocolMessageType('ConsensusCheckBlocksResponse', (_message.Message,), dict(
-  DESCRIPTOR = _CONSENSUSCHECKBLOCKSRESPONSE,
+ConsensusCheckBlockResponse = _reflection.GeneratedProtocolMessageType('ConsensusCheckBlockResponse', (_message.Message,), dict(
+  DESCRIPTOR = _CONSENSUSCHECKBLOCKRESPONSE,
   __module__ = 'sawtooth_sdk.protobuf.consensus_pb2'
-  # @@protoc_insertion_point(class_scope:ConsensusCheckBlocksResponse)
+  # @@protoc_insertion_point(class_scope:ConsensusCheckBlockResponse)
   ))
-_sym_db.RegisterMessage(ConsensusCheckBlocksResponse)
+_sym_db.RegisterMessage(ConsensusCheckBlockResponse)
 
 ConsensusCommitBlockRequest = _reflection.GeneratedProtocolMessageType('ConsensusCommitBlockRequest', (_message.Message,), dict(
   DESCRIPTOR = _CONSENSUSCOMMITBLOCKREQUEST,
@@ -2701,20 +2160,6 @@ ConsensusBlocksGetResponse = _reflection.GeneratedProtocolMessageType('Consensus
   # @@protoc_insertion_point(class_scope:ConsensusBlocksGetResponse)
   ))
 _sym_db.RegisterMessage(ConsensusBlocksGetResponse)
-
-ConsensusChainHeadGetRequest = _reflection.GeneratedProtocolMessageType('ConsensusChainHeadGetRequest', (_message.Message,), dict(
-  DESCRIPTOR = _CONSENSUSCHAINHEADGETREQUEST,
-  __module__ = 'sawtooth_sdk.protobuf.consensus_pb2'
-  # @@protoc_insertion_point(class_scope:ConsensusChainHeadGetRequest)
-  ))
-_sym_db.RegisterMessage(ConsensusChainHeadGetRequest)
-
-ConsensusChainHeadGetResponse = _reflection.GeneratedProtocolMessageType('ConsensusChainHeadGetResponse', (_message.Message,), dict(
-  DESCRIPTOR = _CONSENSUSCHAINHEADGETRESPONSE,
-  __module__ = 'sawtooth_sdk.protobuf.consensus_pb2'
-  # @@protoc_insertion_point(class_scope:ConsensusChainHeadGetResponse)
-  ))
-_sym_db.RegisterMessage(ConsensusChainHeadGetResponse)
 
 ConsensusSettingsGetRequest = _reflection.GeneratedProtocolMessageType('ConsensusSettingsGetRequest', (_message.Message,), dict(
   DESCRIPTOR = _CONSENSUSSETTINGSGETREQUEST,

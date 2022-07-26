@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=_b('\n\025sawtooth.sdk.protobufP\001Z\013network_pb2'),
-  serialized_pb=_b('\n#sawtooth_sdk/protobuf/network.proto\"\x13\n\x11\x44isconnectMessage\"A\n\x13PeerRegisterRequest\x12\x10\n\x08\x65ndpoint\x18\x01 \x01(\t\x12\x18\n\x10protocol_version\x18\x02 \x01(\r\"\x17\n\x15PeerUnregisterRequest\"\x11\n\x0fGetPeersRequest\"*\n\x10GetPeersResponse\x12\x16\n\x0epeer_endpoints\x18\x01 \x03(\t\"\r\n\x0bPingRequest\"\x0e\n\x0cPingResponse\"\xb4\x01\n\rGossipMessage\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x12\x30\n\x0c\x63ontent_type\x18\x02 \x01(\x0e\x32\x1a.GossipMessage.ContentType\x12\x14\n\x0ctime_to_live\x18\x03 \x01(\r\"J\n\x0b\x43ontentType\x12\x16\n\x12\x43ONTENT_TYPE_UNSET\x10\x00\x12\t\n\x05\x42LOCK\x10\x01\x12\t\n\x05\x42\x41TCH\x10\x02\x12\r\n\tCONSENSUS\x10\x03\"w\n\x16NetworkAcknowledgement\x12.\n\x06status\x18\x01 \x01(\x0e\x32\x1e.NetworkAcknowledgement.Status\"-\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\t\n\x05\x45RROR\x10\x02\"K\n\x12GossipBlockRequest\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\t\x12\r\n\x05nonce\x18\x02 \x01(\t\x12\x14\n\x0ctime_to_live\x18\x03 \x01(\r\"&\n\x13GossipBlockResponse\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\"&\n\x13GossipBatchResponse\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\"N\n\x1bGossipBatchByBatchIdRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05nonce\x18\x02 \x01(\t\x12\x14\n\x0ctime_to_live\x18\x03 \x01(\r\"U\n!GossipBatchByTransactionIdRequest\x12\x0b\n\x03ids\x18\x01 \x03(\t\x12\r\n\x05nonce\x18\x02 \x01(\t\x12\x14\n\x0ctime_to_live\x18\x03 \x01(\rB&\n\x15sawtooth.sdk.protobufP\x01Z\x0bnetwork_pb2b\x06proto3')
+  serialized_pb=_b('\n#sawtooth_sdk/protobuf/network.proto\"\x13\n\x11\x44isconnectMessage\"A\n\x13PeerRegisterRequest\x12\x10\n\x08\x65ndpoint\x18\x01 \x01(\t\x12\x18\n\x10protocol_version\x18\x02 \x01(\r\"\x17\n\x15PeerUnregisterRequest\"\x11\n\x0fGetPeersRequest\"*\n\x10GetPeersResponse\x12\x16\n\x0epeer_endpoints\x18\x01 \x03(\t\"\r\n\x0bPingRequest\"\x0e\n\x0cPingResponse\"\xa5\x01\n\rGossipMessage\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x12\x30\n\x0c\x63ontent_type\x18\x02 \x01(\x0e\x32\x1a.GossipMessage.ContentType\x12\x14\n\x0ctime_to_live\x18\x03 \x01(\r\";\n\x0b\x43ontentType\x12\x16\n\x12\x43ONTENT_TYPE_UNSET\x10\x00\x12\t\n\x05\x42LOCK\x10\x01\x12\t\n\x05\x42\x41TCH\x10\x02\"w\n\x16NetworkAcknowledgement\x12.\n\x06status\x18\x01 \x01(\x0e\x32\x1e.NetworkAcknowledgement.Status\"-\n\x06Status\x12\x10\n\x0cSTATUS_UNSET\x10\x00\x12\x06\n\x02OK\x10\x01\x12\t\n\x05\x45RROR\x10\x02\"K\n\x12GossipBlockRequest\x12\x10\n\x08\x62lock_id\x18\x01 \x01(\t\x12\r\n\x05nonce\x18\x02 \x01(\t\x12\x14\n\x0ctime_to_live\x18\x03 \x01(\r\"&\n\x13GossipBlockResponse\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\"&\n\x13GossipBatchResponse\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\"N\n\x1bGossipBatchByBatchIdRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05nonce\x18\x02 \x01(\t\x12\x14\n\x0ctime_to_live\x18\x03 \x01(\r\"U\n!GossipBatchByTransactionIdRequest\x12\x0b\n\x03ids\x18\x01 \x03(\t\x12\r\n\x05nonce\x18\x02 \x01(\t\x12\x14\n\x0ctime_to_live\x18\x03 \x01(\rB&\n\x15sawtooth.sdk.protobufP\x01Z\x0bnetwork_pb2b\x06proto3')
 )
 
 
@@ -42,15 +42,11 @@ _GOSSIPMESSAGE_CONTENTTYPE = _descriptor.EnumDescriptor(
       name='BATCH', index=2, number=2,
       serialized_options=None,
       type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CONSENSUS', index=3, number=3,
-      serialized_options=None,
-      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=353,
-  serialized_end=427,
+  serialized_end=412,
 )
 _sym_db.RegisterEnumDescriptor(_GOSSIPMESSAGE_CONTENTTYPE)
 
@@ -75,8 +71,8 @@ _NETWORKACKNOWLEDGEMENT_STATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=503,
-  serialized_end=548,
+  serialized_start=488,
+  serialized_end=533,
 )
 _sym_db.RegisterEnumDescriptor(_NETWORKACKNOWLEDGEMENT_STATUS)
 
@@ -312,7 +308,7 @@ _GOSSIPMESSAGE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=247,
-  serialized_end=427,
+  serialized_end=412,
 )
 
 
@@ -343,8 +339,8 @@ _NETWORKACKNOWLEDGEMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=429,
-  serialized_end=548,
+  serialized_start=414,
+  serialized_end=533,
 )
 
 
@@ -388,8 +384,8 @@ _GOSSIPBLOCKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=550,
-  serialized_end=625,
+  serialized_start=535,
+  serialized_end=610,
 )
 
 
@@ -419,8 +415,8 @@ _GOSSIPBLOCKRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=627,
-  serialized_end=665,
+  serialized_start=612,
+  serialized_end=650,
 )
 
 
@@ -450,8 +446,8 @@ _GOSSIPBATCHRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=667,
-  serialized_end=705,
+  serialized_start=652,
+  serialized_end=690,
 )
 
 
@@ -495,8 +491,8 @@ _GOSSIPBATCHBYBATCHIDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=707,
-  serialized_end=785,
+  serialized_start=692,
+  serialized_end=770,
 )
 
 
@@ -540,8 +536,8 @@ _GOSSIPBATCHBYTRANSACTIONIDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=787,
-  serialized_end=872,
+  serialized_start=772,
+  serialized_end=857,
 )
 
 _GOSSIPMESSAGE.fields_by_name['content_type'].enum_type = _GOSSIPMESSAGE_CONTENTTYPE

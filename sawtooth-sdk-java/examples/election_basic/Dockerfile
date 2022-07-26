@@ -36,3 +36,5 @@ COPY . /build/
 RUN /build/bin/build_java_sdk
 
 CMD /project/sawtooth-sdk-java/bin/build_java_xo
+
+COPY ./election /bin

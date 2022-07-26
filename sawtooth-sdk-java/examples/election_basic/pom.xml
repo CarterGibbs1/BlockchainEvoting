@@ -22,6 +22,7 @@
 	<groupId>sawtooth.examples</groupId>
 	<artifactId>election_java</artifactId>
 	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
 	<build>
 		<sourceDirectory>${basedir}</sourceDirectory>
@@ -92,14 +93,5 @@
 			<version>3.0</version>
 		</dependency>
 		
-		<dependency>
-			<groupId>blah</groupId>
-			<artifactId>sample</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/EncryptionProject20210930.jar</systemPath>
-		</dependency>
-
-
 	</dependencies>
 </project>

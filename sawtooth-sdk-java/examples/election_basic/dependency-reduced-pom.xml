@@ -53,14 +53,5 @@
       </plugin>
     </plugins>
   </build>
-  <dependencies>
-    <dependency>
-      <groupId>blah</groupId>
-      <artifactId>sample</artifactId>
-      <version>1.0</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/EncryptionProject20210930.jar</systemPath>
-    </dependency>
-  </dependencies>
 </project>
 
