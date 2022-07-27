@@ -10,6 +10,7 @@ import sawtooth.sdk.processor.Utils;
 import sawtooth.sdk.protobuf.*;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -32,10 +33,12 @@ public class ElectionImp {
 // (action) (name) (pubKeyFile) (privKeyFile)
     public void create(String[] args) throws UnirestException, IOException, ClassNotFoundException {
         PaillierPrivateKey privateKey = PaillierPrivateKey.fromFile(args[3]);
+        String pubKey = Base64.getEncoder().encodeToString(PaillierPublicKey.fromFile(args[2]).toString().getBytes());
+        logger.info("DEBUG: length = " + pubKey.length());
         String publicKeyHex = PaillierPublicKey.fromFile(args[2]).toHex();
 
         // Parameters in sequence : action, name, key
-        String payload = args[1] + "," + args[0] + "," + PaillierPublicKey.fromFile(args[2]).toString();
+        String payload = args[1] + "," + args[0] + "," + pubKey;
         logger.info("Sending payload as - " + payload);
         String payloadBytes = Utils.hash512(payload.getBytes());
         ByteString payloadByteString = ByteString.copyFrom(payload.getBytes());
