@@ -91,7 +91,7 @@ public class BasicElectionHandler implements TransactionHandler {
 
 	@Override
 	public void apply(TpProcessRequest transactionRequest, Context context) throws InvalidTransactionException, InternalError {
-
+		System.out.println("DEBUG: INSIDE APPLY");
 		TransactionData transactionData = getUnpackedTransaction(transactionRequest);
 
 		// The transaction signer is the voter or the election creator (person)
