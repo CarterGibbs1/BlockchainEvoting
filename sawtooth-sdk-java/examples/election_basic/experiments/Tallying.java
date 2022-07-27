@@ -29,7 +29,7 @@ public class Tallying {
                     KeyPair keyPair = keygen.generateKeyPair();
                     pubKeys.add(keyPair.getPublicKey());
                 }
-                PaillierRing ring = new PaillierRing(voterKeyPair, pubKeys, numPubKeysToTest[i], BigInteger.valueOf(new Random().nextInt()));
+                PaillierRing ring = new PaillierRing(voterKeyPair, pubKeys, numPubKeysToTest[j], BigInteger.valueOf(new Random().nextInt()));
                 byte[] message = Election.toOneDimensionalArray(Election.convertVoteToByteArray(messages[new Random().nextInt(messages.length)], NUM_RACES, NUM_CANDIDATES[0], NUM_BYTES));
                 //System.out.println("DEBUG: " + new String(message));
                 PaillierRingParameters ringParam = ring.sign(new BigInteger(message));
