@@ -11,7 +11,7 @@ public class ExperimentConstants {
 
     // generating pub key
     public static final int[] numPubKeysToTest = {5, 10, 15, 20, 25};
-    public static final int NUM_RACES = 3;
+    public static final int NUM_RACES = 1;
     public static final int NUM_BYTES = 7;
 
     // tallying

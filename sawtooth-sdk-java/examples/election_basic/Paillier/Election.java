@@ -103,11 +103,12 @@ public class Election {
             int index = hex2int((byte) vote.charAt(i)) - 1;
             voteInBytes[i][index][NUM_BYTES - 1] = (byte) HEX_ARRAY[1];
         }
+        System.out.println("DEBUG:" + voteInBytes[0][0][0]);
         return voteInBytes;
     }
 
     public static byte[] toOneDimensionalArray(byte[][][] vote) {
-        byte[] retval = new byte[vote.length + vote[0].length + vote[0][0].length];
+        byte[] retval = new byte[vote.length * vote[0].length * vote[0][0].length];
         for (int i = 0; i < vote.length; i++) {
             for (int j = 0; j < vote[0].length; j++) {
                 for (int k = 0; k < vote[0][0].length; k++) {
@@ -115,6 +116,7 @@ public class Election {
                 }
             }
         }
+        System.out.println("DEBUG:" + retval[0]);
         return retval;
     }
 
