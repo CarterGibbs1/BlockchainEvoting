@@ -1,6 +1,9 @@
 package election_basic.experiments;
 
 import election_basic.Paillier.Election;
+import election_basic.Paillier.KeyPair;
+import election_basic.Paillier.PaillierPrivateKey;
+import election_basic.Paillier.PaillierPublicKey;
 
 import java.io.*;
 import java.math.BigInteger;
@@ -37,10 +40,9 @@ public class Tallying {
     }
 
     public static Election getElectionFromFile() throws IOException, ClassNotFoundException {
-        File f = new File(electionFileName);
-        if (!f.exists() || !f.isFile()) throw new FileNotFoundException("Election file not found. Tallying experiment failed");
-        FileInputStream fis = new FileInputStream(f);
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        return (Election) ois.readObject();
+        PaillierPublicKey pk = PaillierPublicKey.fromFile(electionPubFileName);
+        PaillierPrivateKey sk = PaillierPrivateKey.fromFile(electionPrivFileName);
+        KeyPair kp = new KeyPair(sk, pk, null);
+        return new Election(kp);
     }
 }

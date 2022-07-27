@@ -31,12 +31,7 @@ public class createVotes {
     }
 
     public static void createElectionOutput(Election e) throws IOException {
-        File f = new File(electionFileName);
-        if (f.exists() || f.isFile()) f.delete();
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(bos);
-        FileOutputStream fos = new FileOutputStream(f);
-        oos.writeObject(e);
-        fos.write(bos.toByteArray());
+        PaillierPublicKey.toFile(e.getPk(), electionPubFileName);
+        PaillierPrivateKey.toFile(e.getSk(), electionPrivFileName);
     }
 }

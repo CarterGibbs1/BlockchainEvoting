@@ -11,7 +11,7 @@ public class KeyPair {
     private final PaillierPublicKey publicKey;
     private final BigInteger upperBound;
 
-    KeyPair(PaillierPrivateKey privateKey, PaillierPublicKey publicKey, BigInteger upperBound) {
+    public KeyPair(PaillierPrivateKey privateKey, PaillierPublicKey publicKey, BigInteger upperBound) {
         this.privateKey = privateKey;
         this.publicKey = publicKey;
         this.upperBound = upperBound;
