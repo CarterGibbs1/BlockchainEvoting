@@ -11,6 +11,7 @@ import sawtooth.sdk.processor.Utils;
 import sawtooth.sdk.protobuf.*;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -35,7 +36,7 @@ public class ElectionImp {
     public void create(String[] args) throws UnirestException, IOException, ClassNotFoundException {
         PaillierPrivateKey privateKey = PaillierPrivateKey.fromFile(args[3]);
         String pubKey = Base64.getEncoder().encodeToString(PaillierPublicKey.fromFile(args[2]).toString().getBytes());
-        ECKey privKey = new ECKey();
+        ECKey privKey = new ECKey(new SecureRandom());
 	    String publicKeyHex = privKey.getPublicKeyAsHex();
 	    logger.info("DEBUG: length = " + publicKeyHex.length());
         //String publicKeyHex = PaillierPublicKey.fromFile(args[2]).toHex();
