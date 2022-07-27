@@ -49,32 +49,32 @@ public class ElectionImp {
                 .setFamilyVersion("1.0").addInputs(address).setNonce(String.valueOf(new Random().nextInt())).addOutputs(address)
                 .setPayloadSha512(payloadBytes).setSignerPublicKey(publicKeyHex).build();
 
-        logger.info("Created transaction header - " + txnHeader);
+        //logger.info("Created transaction header - " + txnHeader);
         ByteString txnHeaderBytes = txnHeader.toByteString();
 
         String value = privateKey.sign(txnHeader.toString()).toString();
         Transaction txn = Transaction.newBuilder().setHeader(txnHeaderBytes).setPayload(payloadByteString)
                 .setHeaderSignature(value).build();
-        logger.info("Created transaction - " + txn);
+        //logger.info("Created transaction - " + txn);
 
         //TpProcessRequest tp = TpProcessRequest.newBuilder().setHeader(txnHeader).setPayload(payloadByteString).setSignature(value).build();
 
         BatchHeader batchHeader = BatchHeader.newBuilder().clearSignerPublicKey().setSignerPublicKey(publicKeyHex)
                 .addTransactionIds(txn.getHeaderSignature()).build();
-        logger.info("Created batch header - " + batchHeader);
+        //logger.info("Created batch header - " + batchHeader);
 
         ByteString batchHeaderBytes = batchHeader.toByteString();
 
         String valueBatch = privateKey.sign(batchHeaderBytes.toString()).toString();
         Batch batch = Batch.newBuilder().setHeader(batchHeaderBytes).setHeaderSignature(valueBatch).setTrace(true)
                 .addTransactions(txn).build();
-        logger.info("Created batch - " + batch);
+        //logger.info("Created batch - " + batch);
         BatchList batchList = BatchList.newBuilder().addBatches(batch).build();
         ByteString batchBytes = batchList.toByteString();
 
-	logger.info("Posting to \"http://validator:4004\"");
+	logger.info("Posting to \"http://validator:8008/batches\"");
 
-        String serverResponse = Unirest.post("http://validator:4004")
+        String serverResponse = Unirest.post("http://rest-api:8008/batches")
                 .header("Content-Type", "application/octet-stream").body(batchBytes.toByteArray()).asString()
                 .getBody();
 
@@ -87,7 +87,7 @@ public class ElectionImp {
 
 
         // Parameters in sequence : action, name, electionPubKey
-        String payload = args[0] + "," + args[1] + "," + PaillierPublicKey.fromFile(args[2]).toString();
+        String payload = args[1] + "," + args[0] + "," + PaillierPublicKey.fromFile(args[2]).toString();
 
         logger.info("Sending payload as - " + payload);
         String payloadBytes = Utils.hash512(payload.getBytes());
@@ -102,36 +102,36 @@ public class ElectionImp {
                 .setFamilyVersion("1.0").addInputs(address).setNonce(String.valueOf(new Random().nextInt())).addOutputs(address)
                 .setPayloadSha512(payloadBytes).setSignerPublicKey(publicKeyHex);
 
-        logger.info("before building");
+        //logger.info("before building");
 
         TransactionHeader txnHeader = txnHeaderb.build();
 
-        logger.info("Created transaction header - " + txnHeader);
+        //logger.info("Created transaction header - " + txnHeader);
         ByteString txnHeaderBytes = txnHeader.toByteString();
 
         String value = privateKey.sign(txnHeader.toString()).toString();
         Transaction txn = Transaction.newBuilder().setHeader(txnHeaderBytes).setPayload(payloadByteString)
                 .setHeaderSignature(value).build();
-        logger.info("Created transaction - " + txn);
+        //logger.info("Created transaction - " + txn);
 
         //TpProcessRequest tp = TpProcessRequest.newBuilder().setHeader(txnHeader).setPayload(payloadByteString).setSignature(value).build();
         BatchHeader batchHeader = BatchHeader.newBuilder().clearSignerPublicKey().setSignerPublicKey(publicKeyHex)
                 .addTransactionIds(txn.getHeaderSignature()).build();
 
-        logger.info("Created batch header - " + batchHeader);
+        //logger.info("Created batch header - " + batchHeader);
 
         ByteString batchHeaderBytes = batchHeader.toByteString();
 
         String valueBatch = privateKey.sign(batchHeaderBytes.toString()).toString();
         Batch batch = Batch.newBuilder().setHeader(batchHeaderBytes).setHeaderSignature(valueBatch).setTrace(true)
                 .addTransactions(txn).build();
-        logger.info("Created batch - " + batch);
+        //logger.info("Created batch - " + batch);
 
         BatchList batchList = BatchList.newBuilder().addBatches(batch).build();
         ByteString batchBytes = batchList.toByteString();
 
-        logger.info("Posting to \"http://validator:4004\"");
-        String serverResponse = Unirest.post("http://validator:4004")
+        logger.info("Posting to \"http://validator:8008/batches\"");
+        String serverResponse = Unirest.post("http://validator:8008/batches")
                 .header("Content-Type", "application/octet-stream").body(batchBytes.toByteArray()).asString()
                 .getBody();
 
