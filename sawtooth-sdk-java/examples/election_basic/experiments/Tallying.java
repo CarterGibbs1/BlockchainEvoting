@@ -30,7 +30,8 @@ public class Tallying {
             }
             PaillierRing ring = new PaillierRing(voterKeyPair, pubKeys, numPubKeysToTest[i], BigInteger.valueOf(new Random().nextInt()));
             byte[] message = Election.toOneDimensionalArray(Election.convertVoteToByteArray(messages[new Random().nextInt(messages.length)], NUM_RACES, NUM_CANDIDATES[0], NUM_BYTES));
-            PaillierRingParameters ringParam = ring.sign(new BigInteger(new String(message), 16));
+            System.out.println("DEBUG: " + new String(message));
+            PaillierRingParameters ringParam = ring.sign(new BigInteger(message));
             e.addVoteToDatabase(ringParam);
         }
         System.out.println("Done generating blockchain");

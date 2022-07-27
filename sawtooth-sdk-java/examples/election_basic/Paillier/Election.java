@@ -103,7 +103,6 @@ public class Election {
             int index = hex2int((byte) vote.charAt(i)) - 1;
             voteInBytes[i][index][NUM_BYTES - 1] = (byte) HEX_ARRAY[1];
         }
-        System.out.println("DEBUG:" + voteInBytes[0][0][0]);
         return voteInBytes;
     }
 
@@ -116,7 +115,6 @@ public class Election {
                 }
             }
         }
-        System.out.println("DEBUG:" + retval[0]);
         return retval;
     }
 
