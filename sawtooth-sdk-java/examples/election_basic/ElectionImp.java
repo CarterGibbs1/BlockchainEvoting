@@ -34,8 +34,10 @@ public class ElectionImp {
     public void create(String[] args) throws UnirestException, IOException, ClassNotFoundException {
         PaillierPrivateKey privateKey = PaillierPrivateKey.fromFile(args[3]);
         String pubKey = Base64.getEncoder().encodeToString(PaillierPublicKey.fromFile(args[2]).toString().getBytes());
-        logger.info("DEBUG: length = " + pubKey.length());
-        String publicKeyHex = PaillierPublicKey.fromFile(args[2]).toHex();
+       	ECKey tprivateKey = Signing.generatePrivateKey(null); // new random privatekey
+	String publicKeyHex = tprivateKey.getPublicKeyAsHex();
+	logger.info("DEBUG: length = " + publicKeyHex.length());
+        //String publicKeyHex = PaillierPublicKey.fromFile(args[2]).toHex();
 
         // Parameters in sequence : action, name, key
         String payload = args[1] + "," + args[0] + "," + pubKey;
