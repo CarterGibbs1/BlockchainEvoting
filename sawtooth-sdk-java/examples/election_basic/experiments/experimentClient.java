@@ -5,7 +5,7 @@ public class experimentClient {
     public static void main(String[] args) {
         switch (args[0]) {
             case "tally":
-                Talling.main(args);
+                Tallying.main(args);
                 break;
             case "generate":
                 generatingPubKey.main(args);

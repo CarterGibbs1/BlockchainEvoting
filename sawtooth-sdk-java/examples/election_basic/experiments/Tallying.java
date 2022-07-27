@@ -8,7 +8,7 @@ import java.util.Random;
 
 import static election_basic.experiments.ExperimentConstants.*;
 
-public class Talling {
+public class Tallying {
     //java Tallying
     public static void main(String[] args) {
         for (int i = 0; i < NUM_BALLOTS.length; i++) {
@@ -29,7 +29,8 @@ public class Talling {
                 pubKeys.add(keyPair.getPublicKey());
             }
             PaillierRing ring = new PaillierRing(voterKeyPair, pubKeys, numPubKeysToTest[i], BigInteger.valueOf(new Random().nextInt()));
-            PaillierRingParameters ringParam = ring.sign(new BigInteger(Election.toOneDimensionalArray(Election.convertVoteToByteArray(messages[new Random().nextInt(messages.length)], NUM_RACES, NUM_CANDIDATES[0], NUM_BYTES))));
+            byte[] message = Election.toOneDimensionalArray(Election.convertVoteToByteArray(messages[new Random().nextInt(messages.length)], NUM_RACES, NUM_CANDIDATES[0], NUM_BYTES));
+            PaillierRingParameters ringParam = ring.sign(new BigInteger(new String(message), 16));
             e.addVoteToDatabase(ringParam);
         }
         System.out.println("Done generating blockchain");
