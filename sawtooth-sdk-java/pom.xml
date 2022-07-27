@@ -52,6 +52,11 @@
             <artifactId>unirest-java</artifactId>
             <version>1.4.9</version>
         </dependency>
+        <dependency>
+            <groupId>org.bitcoinj</groupId>
+            <artifactId>bitcoinj-core</artifactId>
+            <version>0.14.4</version>
+        </dependency>
     </dependencies>
     <packaging>pom</packaging>
 
