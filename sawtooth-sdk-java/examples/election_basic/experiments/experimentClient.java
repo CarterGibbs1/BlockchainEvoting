@@ -13,6 +13,8 @@ public class experimentClient {
             case "size":
                 messageSize.main(args);
                 break;
+	    case "help":
+		System.out.println("tests: 'tally', 'generate', 'size'");
             default:
                 System.err.println("Not an experiment");
         }

@@ -37,8 +37,8 @@ public class ElectionImp {
     public void create(String[] args) throws UnirestException, IOException, ClassNotFoundException {
         //PaillierPrivateKey privateKey = PaillierPrivateKey.fromFile(args[3]);
         String pubKey = Base64.getEncoder().encodeToString(PaillierPublicKey.fromFile(args[2]).toString().getBytes());
-        //ECKey privKey = new ECKey(new SecureRandom());
-	PaillierPrivateKey privKey = privateKey;
+        ECKey privKey = new ECKey(new SecureRandom());
+	//PaillierPrivateKey privKey = privateKey;
 	//String publicKeyHex = privKey.getPublicKeyAsHex();
         String publicKeyHex = PaillierPublicKey.fromFile(args[2]).toHex();
 	logger.info("DEBUG: length = " + publicKeyHex.length());
@@ -74,7 +74,8 @@ public class ElectionImp {
 
         ByteString batchHeaderBytes = batchHeader.toByteString();
 
-        String valueBatch = privateKey.sign(batchHeaderBytes.toString()).toString();
+        //String valueBatch = privateKey.sign(batchHeaderBytes.toString()).toString();
+        String valueBatch = privKey.sign(Sha256Hash.wrap(batchHeaderBytes.toByteArray())).toString();
         Batch batch = Batch.newBuilder().setHeader(batchHeaderBytes).setHeaderSignature(valueBatch).setTrace(true)
                 .addTransactions(txn).build();
         //logger.info("Created batch - " + batch);

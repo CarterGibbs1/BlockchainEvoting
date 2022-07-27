@@ -16,3 +16,5 @@ election_basic/Paillier/PaillierRingParameters.class
 election_basic/Paillier/KeyPair.class
 election_basic/Paillier/KeyPairBuilder.class
 election_basic/Paillier/PaillierCipherText.class
+election_basic/experiments/experimentClient.class
+election_basic/experiments/Talling.class
