@@ -28,7 +28,6 @@ public class generatingPubKey {
 
                 String voterMessage = convertVoterToMessage(messages[new Random().nextInt(messages.length)]);
                 byte[] message = Election.toOneDimensionalArray(Election.convertVoteToByteArray(e.getPk().encrypt(new BigInteger(voterMessage)).toString(16), NUM_RACES, NUM_CANDIDATES[0], NUM_BYTES));
-                time[2] -= System.currentTimeMillis();
                 PaillierRingParameters rp = ring.sign(new BigInteger(message));
                 time[2] += System.currentTimeMillis();
                 rp.verifyRingSignature();
@@ -41,10 +40,10 @@ public class generatingPubKey {
     public static void printResults(int numKeys, long[] time) {
         System.out.println("------------ RESULTS -------------");
         System.out.println("NUMBER OF PUBLIC KEYS: " + numKeys);
-        System.out.println("GENERATING RING: " + (time[1] - time[0]) / NUM_TRIALS);
-        System.out.println("VALIDATING RING: " + (time[2] - time[1]) / NUM_TRIALS);
-        System.out.println("SIGNING RING: " + (time[3] - time[2]) / NUM_TRIALS);
-        System.out.println("TOTAL TIME: " + (time[3] - time[0]) / NUM_TRIALS);
+        System.out.println("GENERATING RING: " + (time[1] - time[0]) / NUM_TRIALS / MS_TO_S);
+        System.out.println("SIGNING RING: " + (time[2] - time[1]) / NUM_TRIALS / MS_TO_S);
+        System.out.println("VERIFYING RING: " + (time[3] - time[2]) / NUM_TRIALS / MS_TO_S);
+        System.out.println("TOTAL TIME: " + (time[3] - time[0]) / NUM_TRIALS / MS_TO_S);
         System.out.println();
     }
 

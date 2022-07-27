@@ -2,6 +2,7 @@ package election_basic.experiments;
 
 public class ExperimentConstants {
     // generic system
+    public static final double MS_TO_S = 1000;
     public static final double NUM_TRIALS = 30;
     public static final int BASE = 16;
 

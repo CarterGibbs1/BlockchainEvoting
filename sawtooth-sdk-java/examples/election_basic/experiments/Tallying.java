@@ -25,7 +25,7 @@ public class Tallying {
                 KeyPairBuilder keygen = new KeyPairBuilder();
                 KeyPair voterKeyPair = keygen.generateKeyPair();
                 ArrayList<PaillierPublicKey> pubKeys = new ArrayList<>();
-                for (int k = 0; k < numPubKeysToTest[j]; k++) {
+                for (int k = 0; k < numPubKeysToTest[j] - 1; k++) {
                     KeyPair keyPair = keygen.generateKeyPair();
                     pubKeys.add(keyPair.getPublicKey());
                 }
