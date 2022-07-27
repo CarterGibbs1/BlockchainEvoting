@@ -103,6 +103,18 @@ public class Election {
         return voteInBytes;
     }
 
+    public static byte[] toOneDimensionalArray(byte[][][] vote) {
+        byte[] retval = new byte[vote.length * vote[0].length * vote[0][0].length];
+        for (int i = 0; i < vote.length; i++) {
+            for (int j = 0; j < vote[0].length; j++) {
+                for (int k = 0; k < vote[0][0].length; k++) {
+                    retval[i + j + k] = (byte) int2hex(vote[i][j][k]);
+                }
+            }
+        }
+        return retval;
+    }
+
     public static byte[][][] addVoteArray(byte[][][] vote1, byte[][][] vote2) {
         final int NUM_RACES = vote1.length;
         final int NUM_CANDIDATES = vote1[0].length;

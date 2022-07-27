@@ -29,13 +29,13 @@ public class ElectionImp {
 
     }
 */
-// (action) (name) (pubKey) (privKey)
+// (action) (name) (pubKeyFile) (privKeyFile)
     public void create(String[] args) throws UnirestException, IOException, ClassNotFoundException {
         PaillierPrivateKey privateKey = PaillierPrivateKey.fromFile(args[3]);
         String publicKeyHex = PaillierPublicKey.fromFile(args[2]).toHex();
 
-        // Parameters in sequence : action, name
-        String payload = args[0] + "," + args[1] + "," + PaillierPublicKey.fromFile(args[2]).toString();
+        // Parameters in sequence : action, name, key
+        String payload = args[1] + "," + args[0] + "," + PaillierPublicKey.fromFile(args[2]).toString();
         logger.info("Sending payload as - " + payload);
         String payloadBytes = Utils.hash512(payload.getBytes());
         ByteString payloadByteString = ByteString.copyFrom(payload.getBytes());
