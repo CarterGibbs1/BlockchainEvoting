@@ -12,7 +12,6 @@ public class PaillierRingParameters implements Serializable {
     private static BigInteger v; // solution of ring equation
     private static ArrayList<BigInteger> x;
     private static BigInteger random_seed;
-
     public static final String DELIMITER = ";";
 
     public PaillierRingParameters(BigInteger message, ArrayList<PaillierPublicKey> pk, BigInteger v, ArrayList<BigInteger> x, BigInteger random) {

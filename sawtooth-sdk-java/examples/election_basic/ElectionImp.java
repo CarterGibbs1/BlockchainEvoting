@@ -7,6 +7,7 @@ import election_basic.Paillier.PaillierPrivateKey;
 import election_basic.Paillier.PaillierPublicKey;
 import election_basic.util.BlockchainEncoder;
 import org.bitcoinj.core.ECKey;
+import org.bitcoinj.core.Sha256Hash;
 import sawtooth.sdk.processor.Utils;
 import sawtooth.sdk.protobuf.*;
 
@@ -34,7 +35,7 @@ public class ElectionImp {
 */
 // (action) (name) (pubKeyFile) (privKeyFile)
     public void create(String[] args) throws UnirestException, IOException, ClassNotFoundException {
-        PaillierPrivateKey privateKey = PaillierPrivateKey.fromFile(args[3]);
+        //PaillierPrivateKey privateKey = PaillierPrivateKey.fromFile(args[3]);
         String pubKey = Base64.getEncoder().encodeToString(PaillierPublicKey.fromFile(args[2]).toString().getBytes());
         //ECKey privKey = new ECKey(new SecureRandom());
 	PaillierPrivateKey privKey = privateKey;
@@ -60,7 +61,7 @@ public class ElectionImp {
         //logger.info("Created transaction header - " + txnHeader);
         ByteString txnHeaderBytes = txnHeader.toByteString();
 
-        String value = privateKey.sign(txnHeader.toString()).toString();
+        String value = privKey.sign(Sha256Hash.wrap(txnHeaderBytes.toByteArray())).toString();
         Transaction txn = Transaction.newBuilder().setHeader(txnHeaderBytes).setPayload(payloadByteString)
                 .setHeaderSignature(value).build();
         //logger.info("Created transaction - " + txn);
