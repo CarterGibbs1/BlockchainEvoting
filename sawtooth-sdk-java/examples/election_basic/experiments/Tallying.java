@@ -35,7 +35,7 @@ public class Tallying {
                 PaillierRingParameters ringParam = ring.sign(new BigInteger(message));
                 e.addVoteToDatabase(ringParam);
             }
-            System.out.println("Done generating blockchain");
+            //System.out.println("Done generating blockchain");
             time[0] = System.currentTimeMillis();
             BigInteger total = e.tallyVotes();
             time[1] = System.currentTimeMillis();
@@ -49,9 +49,9 @@ public class Tallying {
         System.out.println("------------ RESULTS -------------");
         System.out.println("NUMBER OF BALLOTS: " + numBallots);
         System.out.println("NUMBER OF PUB_KEYS: " + numKeys);
-        System.out.println("HOMOMORPHIC ENCRYPTION: " + (time[1] - time[0]));
-        System.out.println("DECRYPTING: " + (time[2] - time[1]));
-        System.out.println("TOTAL: " + (time[2] - time[0]));
+        System.out.println("HOMOMORPHIC ENCRYPTION: " + (time[1] - time[0]) / MS_TO_S);
+        System.out.println("DECRYPTING: " + (time[2] - time[1]) / MS_TO_S);
+        System.out.println("TOTAL: " + (time[2] - time[0]) / MS_TO_S);
         System.out.println();
     }
 }
