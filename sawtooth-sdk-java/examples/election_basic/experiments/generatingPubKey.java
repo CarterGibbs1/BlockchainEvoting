@@ -10,10 +10,9 @@ import static election_basic.experiments.ExperimentConstants.*;
 
 public class generatingPubKey {
 
-
-
     public static void main(String[] args) {
         for (int i = 0; i < numPubKeysToTest.length; i++) {
+            Election e = new Election();
             long[] time = new long[4];
             for (int j = 0; j < NUM_TRIALS; j++) {
                 KeyPairBuilder keygen = new KeyPairBuilder();
@@ -27,8 +26,8 @@ public class generatingPubKey {
                 PaillierRing ring = new PaillierRing(voterKeyPair, pubKeys, numPubKeysToTest[i], BigInteger.valueOf(new Random().nextInt()));
                 time[1] += System.currentTimeMillis();
 
-                String voterMessage =convertVoterToMessage(messages[new Random().nextInt(messages.length)]);
-                byte[] message = Election.toOneDimensionalArray(Election.convertVoteToByteArray(voterMessage, NUM_RACES, NUM_CANDIDATES[0], NUM_BYTES));
+                String voterMessage = convertVoterToMessage(messages[new Random().nextInt(messages.length)]);
+                byte[] message = Election.toOneDimensionalArray(Election.convertVoteToByteArray(e.getPk().encrypt(new BigInteger(voterMessage)).toString(16), NUM_RACES, NUM_CANDIDATES[0], NUM_BYTES));
                 time[2] -= System.currentTimeMillis();
                 PaillierRingParameters rp = ring.sign(new BigInteger(message));
                 time[2] += System.currentTimeMillis();

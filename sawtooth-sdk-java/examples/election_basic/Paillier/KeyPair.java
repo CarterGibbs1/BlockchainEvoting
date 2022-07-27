@@ -47,4 +47,20 @@ public class KeyPair {
 
         return p;
     }
+
+    public final BigInteger decrypt(BigInteger c) {
+        BigInteger n = publicKey.getN();
+        BigInteger nSquare = publicKey.getnSquared();
+        BigInteger lambda = privateKey.getLambda();
+
+        BigInteger u = privateKey.getPreCalculatedDenominator();
+
+        BigInteger p = c.modPow(lambda, nSquare).subtract(BigInteger.ONE).divide(n).multiply(u).mod(n);
+
+        if (upperBound != null && p.compareTo(upperBound) > 0) {
+            p = p.subtract(n);
+        }
+
+        return p;
+    }
 }

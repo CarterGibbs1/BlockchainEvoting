@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Election {
 
-    public static final String FILE_DIR = "./votes.txt";
+    public static final String FILE_DIR = "./blockchain.txt";
 
     private static KeyPair keyPair;
 
@@ -84,6 +84,9 @@ public class Election {
     }
 
     public BigInteger revealResult(election_basic.Paillier.PaillierCipherText encrypted) {
+        return keyPair.decrypt(encrypted);
+    }
+    public BigInteger revealResult(BigInteger encrypted) {
         return keyPair.decrypt(encrypted);
     }
 

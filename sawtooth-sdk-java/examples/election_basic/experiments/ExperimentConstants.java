@@ -11,9 +11,12 @@ public class ExperimentConstants {
 
     // generating pub key
     public static final int[] numPubKeysToTest = {5, 10, 15, 20, 25};
-
     public static final int NUM_RACES = 3;
     public static final int NUM_BYTES = 7;
+
+    // tallying
+    public static final int[] NUM_BALLOTS = {250, 500, 750, 1000};
+    public static final String blockchainFileName = "./blockchain.txt";
 
     // generating pubKey and message size
     public static final String[] messages = {

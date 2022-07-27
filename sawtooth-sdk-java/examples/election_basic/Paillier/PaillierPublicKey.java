@@ -52,7 +52,7 @@ public class PaillierPublicKey implements Serializable {
      * @param m The plaintext that should be encrypted.
      * @return The corresponding ciphertext.
      */
-    public final PaillierCipherText encrypt(BigInteger m) {
+    public final PaillierCipherText encryptToCipherText(BigInteger m) {
 
         BigInteger r;
         do {
@@ -66,6 +66,28 @@ public class PaillierPublicKey implements Serializable {
         result = result.mod(nSquared);
 
         return new PaillierCipherText(result, this);
+    }
+
+    /**
+     * Encrypts the given plaintext.
+     *
+     * @param m The plaintext that should be encrypted.
+     * @return The corresponding ciphertext.
+     */
+    public final BigInteger encrypt(BigInteger m) {
+
+        BigInteger r;
+        do {
+            r = new BigInteger(bits, new Random());
+        } while (r.compareTo(n) >= 0);
+
+        BigInteger result = g.modPow(m, nSquared);
+        BigInteger x = r.modPow(n, nSquared);
+
+        result = result.multiply(x);
+        result = result.mod(nSquared);
+
+        return result;
     }
 
     @Override
