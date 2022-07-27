@@ -6,10 +6,9 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import election_basic.Paillier.PaillierPrivateKey;
 import election_basic.Paillier.PaillierPublicKey;
 import election_basic.util.BlockchainEncoder;
+import org.bitcoinj.core.ECKey;
 import sawtooth.sdk.processor.Utils;
 import sawtooth.sdk.protobuf.*;
-import sawtooth.sdk.client.Signing;
-import org.bitcoinj.core.ECKey;
 
 import java.io.IOException;
 import java.util.Base64;
@@ -36,8 +35,8 @@ public class ElectionImp {
     public void create(String[] args) throws UnirestException, IOException, ClassNotFoundException {
         PaillierPrivateKey privateKey = PaillierPrivateKey.fromFile(args[3]);
         String pubKey = Base64.getEncoder().encodeToString(PaillierPublicKey.fromFile(args[2]).toString().getBytes());
-       	ECKey tprivateKey = Signing.generatePrivateKey(null); // new random privatekey
-	    String publicKeyHex = tprivateKey.getPublicKeyAsHex();
+        ECKey privKey = new ECKey();
+	    String publicKeyHex = privKey.getPublicKeyAsHex();
 	    logger.info("DEBUG: length = " + publicKeyHex.length());
         //String publicKeyHex = PaillierPublicKey.fromFile(args[2]).toHex();
 
