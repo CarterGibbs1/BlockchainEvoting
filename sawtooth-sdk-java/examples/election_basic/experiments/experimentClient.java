@@ -15,6 +15,7 @@ public class experimentClient {
                 break;
 	    case "help":
 		System.out.println("tests: 'tally', 'generate', 'size'");
+		break;
             default:
                 System.err.println("Not an experiment");
         }
