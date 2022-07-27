@@ -18,6 +18,7 @@ public class ExperimentConstants {
     // tallying
     public static final int[] NUM_BALLOTS = {250, 500, 750, 1000};
     public static final String blockchainFileName = "./blockchain.txt";
+    public static final String electionFileName = "./election.txt";
 
     // generating pubKey and message size
     public static final String[] messages = {

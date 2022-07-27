@@ -1,39 +1,23 @@
 package election_basic.experiments;
 
-import election_basic.Paillier.*;
+import election_basic.Paillier.Election;
 
+import java.io.*;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Random;
 
 import static election_basic.experiments.ExperimentConstants.*;
 
 public class Tallying {
     //java Tallying
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         for (int i = 0; i < NUM_BALLOTS.length; i++) {
             runExperiment(NUM_BALLOTS[i]);
         }
     }
 
-    private static void runExperiment(int num_ballots) {
-        Election e = new Election();
+    private static void runExperiment(int num_ballots) throws IOException, ClassNotFoundException {
+        Election e = getElectionFromFile();
         long[] time = new long[3];
-        for (int i = 0; i < num_ballots; i++) {
-            e.createDatabaseFile();
-            KeyPairBuilder keygen = new KeyPairBuilder();
-            KeyPair voterKeyPair = keygen.generateKeyPair();
-            ArrayList<PaillierPublicKey> pubKeys = new ArrayList<>();
-            for (int k = 0; k < numPubKeysToTest[0] - 1; k++) {
-                KeyPair keyPair = keygen.generateKeyPair();
-                pubKeys.add(keyPair.getPublicKey());
-            }
-            PaillierRing ring = new PaillierRing(voterKeyPair, pubKeys, numPubKeysToTest[0], BigInteger.valueOf(new Random().nextInt()));
-            byte[] message = Election.toOneDimensionalArray(Election.convertVoteToByteArray(messages[new Random().nextInt(messages.length)], NUM_RACES, NUM_CANDIDATES[0], NUM_BYTES));
-            //System.out.println("DEBUG: " + new String(message));
-            PaillierRingParameters ringParam = ring.sign(new BigInteger(message));
-            e.addVoteToDatabase(ringParam);
-        }
         //System.out.println("Done generating blockchain");
         time[0] = System.currentTimeMillis();
         BigInteger total = e.tallyVotes();
@@ -50,5 +34,13 @@ public class Tallying {
         System.out.println("DECRYPTING: " + (time[2] - time[1]) / MS_TO_S);
         System.out.println("TOTAL: " + (time[2] - time[0]) / MS_TO_S);
         System.out.println();
+    }
+
+    public static Election getElectionFromFile() throws IOException, ClassNotFoundException {
+        File f = new File(electionFileName);
+        if (!f.exists() || !f.isFile()) throw new FileNotFoundException("Election file not found. Tallying experiment failed");
+        FileInputStream fis = new FileInputStream(f);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        return (Election) ois.readObject();
     }
 }

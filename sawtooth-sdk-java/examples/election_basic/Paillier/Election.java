@@ -1,13 +1,10 @@
 package election_basic.Paillier;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.math.BigInteger;
 import java.util.Scanner;
 
-public class Election {
+public class Election implements Serializable {
 
     public static final String FILE_DIR = "./blockchain.txt";
 
@@ -17,6 +14,10 @@ public class Election {
         election_basic.Paillier.KeyPairBuilder keygen = new election_basic.Paillier.KeyPairBuilder();
         keyPair = keygen.generateKeyPair();
         createDatabaseFile();
+    }
+
+    public Election(KeyPair k) {
+        keyPair = k;
     }
 
     public void createDatabaseFile() {
