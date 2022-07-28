@@ -5,6 +5,7 @@ import org.apache.commons.codec.binary.Hex;
 import java.io.*;
 import java.math.BigInteger;
 import java.util.Random;
+import java.util.Scanner;
 
 
 /**
@@ -125,29 +126,23 @@ public class PaillierPublicKey implements Serializable {
             f.delete();
         }
         f.createNewFile();
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(bos);
-        oos.writeObject(publicKey);
-        FileOutputStream fos = new FileOutputStream(f);
-        PrintWriter pw = new PrintWriter(fos);
-        pw.print(bos.toByteArray());
-        oos.close();
-        bos.close();
-        pw.close();
-        fos.close();
+        PrintWriter pw = new PrintWriter(f);
+        pw.print(publicKey.toString());
     }
 
-    public static PaillierPublicKey fromFile(String name) throws IOException, ClassNotFoundException {
+    public static PaillierPublicKey fromFile(String name) throws IOException {
         File f = new File(name);
         if (!f.exists() || !f.isFile()) {
             throw new FileNotFoundException("File does not exist");
         }
-        FileInputStream fis = new FileInputStream(f);
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        PaillierPublicKey pk = (PaillierPublicKey) ois.readObject();
-        ois.close();
-        fis.close();
-        return pk;
+        Scanner s = new Scanner(f);
+        s.useDelimiter(";");
+        int bits = Integer.parseInt(s.next());
+        BigInteger n = new BigInteger(s.next());
+        BigInteger nSquared = new BigInteger(s.next());
+        BigInteger g = new BigInteger(s.next());
+
+        return new PaillierPublicKey(n, nSquared, g, bits);
     }
 
     public String toHex() {
