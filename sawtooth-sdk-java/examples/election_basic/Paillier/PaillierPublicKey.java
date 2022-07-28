@@ -128,6 +128,7 @@ public class PaillierPublicKey implements Serializable {
         f.createNewFile();
         PrintWriter pw = new PrintWriter(f);
         pw.print(publicKey.toString());
+        pw.close();
     }
 
     public static PaillierPublicKey fromFile(String name) throws IOException {
@@ -141,6 +142,7 @@ public class PaillierPublicKey implements Serializable {
         BigInteger n = new BigInteger(s.next());
         BigInteger nSquared = new BigInteger(s.next());
         BigInteger g = new BigInteger(s.next());
+        s.close();
 
         return new PaillierPublicKey(n, nSquared, g, bits);
     }

@@ -44,6 +44,7 @@ public class PaillierPrivateKey implements Serializable {
         f.createNewFile();
         PrintWriter pw = new PrintWriter(f);
         pw.print(privateKey.toString());
+        pw.close();
     }
 
     public static PaillierPrivateKey fromFile(String name) throws IOException, ClassNotFoundException {
@@ -55,6 +56,7 @@ public class PaillierPrivateKey implements Serializable {
         s.useDelimiter(";");
         BigInteger lambda = new BigInteger(s.next());
         BigInteger pre = new BigInteger(s.next());
+        s.close();
 
         return new PaillierPrivateKey(lambda, pre);
     }
