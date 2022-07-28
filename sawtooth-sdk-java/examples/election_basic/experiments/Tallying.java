@@ -21,21 +21,23 @@ public class Tallying {
     private static void runExperiment(int num_ballots) throws IOException, ClassNotFoundException {
         Election e = getElectionFromFile();
         long[] time = new long[3];
-        //System.out.println("Done generating blockchain");
-        time[0] = System.currentTimeMillis();
-        BigInteger total = e.tallyVotes();
-        time[1] = System.currentTimeMillis();
-        e.revealResult(total);
-        time[2] = System.currentTimeMillis();
+        for (int i = 0; i < NUM_TRIALS; i++) {
+            //System.out.println("Done generating blockchain");
+            time[0] += System.currentTimeMillis();
+            BigInteger total = e.tallyVotes();
+            time[1] += System.currentTimeMillis();
+            e.revealResult(total);
+            time[2] += System.currentTimeMillis();
+        }
         printResults(num_ballots, time);
     }
 
     public static void printResults(int numBallots, long[] time) {
         System.out.println("------------ RESULTS -------------");
         System.out.println("NUMBER OF BALLOTS: " + numBallots);
-        System.out.println("HOMOMORPHIC ENCRYPTION: " + (time[1] - time[0]) / MS_TO_S);
-        System.out.println("DECRYPTING: " + (time[2] - time[1]) / MS_TO_S);
-        System.out.println("TOTAL: " + (time[2] - time[0]) / MS_TO_S);
+        System.out.println("HOMOMORPHIC ENCRYPTION: " + (time[1] - time[0]) / MS_TO_S / NUM_TRIALS);
+        System.out.println("DECRYPTING: " + (time[2] - time[1]) / MS_TO_S / NUM_TRIALS);
+        System.out.println("TOTAL: " + (time[2] - time[0]) / MS_TO_S / NUM_TRIALS);
         System.out.println();
     }
 
